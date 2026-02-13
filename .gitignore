@@ -1,0 +1,28 @@
+# Node
+node_modules/
+.next/
+.env
+.env.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python/AI
+__pycache__/
+*.py[cod]
+*$py.class
+*.pt
+*.pth
+*.gguf
+*.bin
+venv/
+.venv/
+env/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
