@@ -47,7 +47,7 @@ PHASE 2: PHASE 2: PLANNING
     • Establish linting and formatting standards (e.g., Prettier, ESLint)
     • Set up branch protection rules to ensure quality control
 
-[ ] Create Architecture Designs
+[x] Create Architecture Designs
     • Identify the core components and services required for the application.
     • Design data flow diagrams and entity-relationship diagrams for database management.
     • Select the appropriate technology stack, including backend frameworks and frontend libraries.
