@@ -53,7 +53,7 @@
   - Define the branching model (e.g., Trunk-based development vs GitFlow)
   - Establish linting and formatting standards (e.g., Prettier, ESLint)
   - Set up branch protection rules to ensure quality control
-  - 🔗 *Documentation*: [GitOps Strategy](docs/architecture/gitops-strategy.md)
+  - 🔗 *Documentation*: [Codebase Strategy](docs/architecture/codebase-strategy.md)
 
 - **🟢 [DONE] Create Architecture Designs**
   - Identify the core components and services required for the application.

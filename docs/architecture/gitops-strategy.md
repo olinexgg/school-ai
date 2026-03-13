@@ -24,20 +24,4 @@ sequenceDiagram
     Coolify->>Docker: Build & Deploy New Container
 ```
 
-## Codebase Strategy
-- **Structure**: **Monorepo**. The entire ecosystem (Next.js portals, Ollama Modelfiles, scripts) lives in a single repository. This ensures breaking changes in the AI models are instantly caught by the frontend configuration.
-- **Branching Model**: **Trunk-based development**.
-    - `dev` Branch: Active development and staging. Short-lived feature branches merge here quickly to avoid merge conflicts.
-    - `main` Branch: Production source of truth.
-- **Quality Control**:
-  - **Linting**: Enforced strictly via Prettier and ESLint in pre-commit hooks.
-  - **Branch Protection**: `main` requires at least 1 approving review and passing CI status checks to merge.
 
-### Branching Flow
-```mermaid
-flowchart LR
-    Feature[Feature Branches] -->|PR + Linting| Dev[dev Branch]
-    Dev -->|Staging Deploy| Test{Review & Test}
-    Test -- Approved --> Main[main Branch]
-    Main -->|Production Deploy| Coolify[Local Server]
-```
