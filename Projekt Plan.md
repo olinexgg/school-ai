@@ -42,24 +42,24 @@
   - 🔗 *Documentation*: [Infrastructure Topology](docs/architecture/infrastructure-topology.md)
 
 - **🟢 [DONE] GitOps Strategy Expansion**
-  - Choose between Push-based or Pull-based deployment models
-  - Define the reconciliation loop interval for system state checks
-  - Establish secret management protocol (e.g., Sealed Secrets or Environment variables in Git)
-  - Draft the CI/CD pipeline for automated testing and deployment to the local server
+  - Establish a Pull-based GitOps deployment model via Coolify
+  - Set a 60-second reconciliation loop interval for state drift checks
+  - Manage secrets securely via Coolify environment variables
+  - Configure CI/CD pipeline with GitHub Actions (linting) and Webhook auto-deployments
   - 🔗 *Documentation*: [GitOps Strategy](docs/architecture/gitops-strategy.md)
 
 - **🟢 [DONE] Codebase Strategy Expansion**
-  - Decide between Monorepo or Polyrepo structure for Frontend and AI components
-  - Define the branching model (e.g., Trunk-based development vs GitFlow)
-  - Establish linting and formatting standards (e.g., Prettier, ESLint)
-  - Set up branch protection rules to ensure quality control
+  - Implement a Monorepo architecture for the web portal and AI components
+  - Establish a Trunk-based development branching model (`dev` -> `main`)
+  - Enforce quality control using Prettier, ESLint, and Husky pre-commit hooks
+  - Design scalable Frontend (React Server Components) and Backend (Controller/Service) flow
   - 🔗 *Documentation*: [Codebase Strategy](docs/architecture/codebase-strategy.md)
 
 - **🟢 [DONE] Create Architecture Designs**
-  - Identify the core components and services required for the application.
-  - Design data flow diagrams and entity-relationship diagrams for database management.
-  - Select the appropriate technology stack, including backend frameworks and frontend libraries.
-  - Define API contracts and communication protocols between different system modules.
+  - Select Next.js 15 (App Router) and Tailwind CSS for the Frontend portal
+  - Select Node.js API Routes and PostgreSQL database for the Backend
+  - Select Ollama (GPU Accelerated) and Open WebUI for the AI Inference layer
+  - Define RESTful API contracts passing between Next.js, the backend, and Ollama
   - 🔗 *Documentation*: [System Design](docs/architecture/system-design.md)
 
 - **🟢 [DONE] Mockup Teacher Portal in stitch**
