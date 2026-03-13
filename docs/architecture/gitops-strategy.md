@@ -24,4 +24,13 @@ sequenceDiagram
     Coolify->>Docker: Build & Deploy New Container
 ```
 
+## Branching Flow
+To trigger the GitOps pipelines above, the following branching flow is strictly enforced:
 
+```mermaid
+flowchart LR
+    Feature[Feature Branches] -->|PR + Linting| Dev[dev Branch]
+    Dev -->|Staging Deploy| Test{Review & Test}
+    Test -- Approved --> Main[main Branch]
+    Main -->|Production Deploy| Coolify[Local Server]
+```
