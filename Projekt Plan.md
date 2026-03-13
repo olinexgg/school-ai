@@ -13,35 +13,35 @@ PHASE 1: PHASE 1: CONCEPT
 PHASE 2: PHASE 2: PLANNING
 --------------------------
 
-[ ] Procurement & Physical Setup
+[x] Procurement & Physical Setup
     • Receive the Captiva PC (i7-14700KF / RTX 5070 Ti)
     • Install the 2TB NVMe SSD into the second slot
     • Boot into BIOS and verify both drives are detected
 
-[ ] Network & Identity Planning
+[x] Network & Identity Planning
     • Map hardware MAC address to cloud.fimp.net
     • Draft the static identity configuration for netplan
     • Verify the DNS entry propagation plan
 
-[ ] Local OS Installation
+[x] Local OS Installation
     • Keep Drive A (1TB) for Windows
     • Flash Ubuntu Server ISO to a USB stick
     • Install Ubuntu Server on Drive B (2TB)
     • Configure GRUB to allow booting either OS
 
-[ ] Install and configure Google Antigravity Agent
+[x] Install and configure Google Antigravity Agent
     • Review system requirements and hardware compatibility for AntigravityAgent
     • Design the network topology and firewall rules required for agent communication.
     • Define security protocols and access control lists for the antigravity management console.
     • Create a detailed configuration checklist for the deployment phase.
 
-[ ] GitOps Strategy Expansion
+[x] GitOps Strategy Expansion
     • Choose between Push-based or Pull-based deployment models
     • Define the reconciliation loop interval for system state checks
     • Establish secret management protocol (e.g., Sealed Secrets or Environment variables in Git)
     • Draft the CI/CD pipeline for automated testing and deployment to the local server
 
-[ ] Codebase Strategy Expansion
+[x] Codebase Strategy Expansion
     • Decide between Monorepo or Polyrepo structure for Frontend and AI components
     • Define the branching model (e.g., Trunk-based development vs GitFlow)
     • Establish linting and formatting standards (e.g., Prettier, ESLint)
