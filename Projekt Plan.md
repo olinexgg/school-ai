@@ -75,21 +75,22 @@
 ## ⭕ PHASE 3: EXECUTION (TODO)
 
 - **⭕ [TODO] Coolify Docker management**
-  - Execute the Coolify installation script on a fresh Linux server and perform the initial admin account setup.
-  - Configure the Local Docker Engine destination and define the network bridge for container communication.
-  - Deploy a sample Nginx or Hello-World application using a Docker image to verify the orchestration pipeline.
-  - Set up automated cleanup tasks to remove dangling Docker images and volumes to save disk space.
+  - Execute the Coolify installation script on Ubuntu Server.
+  - Setup a Pull-based GitOps deployment pipeline connecting Coolify to the `main` GitHub branch.
+  - Configure the Local Docker destination and map securely to `localhost` to avoid open public ports.
+  - Inject required Environment Variables for the AI engine securely via the Coolify dashboard.
 
 - **⭕ [TODO] Containerization & AI Engine**
-  - Install proprietary NVIDIA drivers and verify with nvidia-smi
-  - Install Docker Engine and Docker Compose
-  - Deploy Ollama with GPU support mapping
-  - Deploy Open WebUI and connect to Ollama API
+  - Install proprietary NVIDIA drivers (v550+) and verify GPU availability via `nvidia-smi`.
+  - Deploy **Ollama** via Coolify Docker Compose, explicitly mapping GPU access.
+  - Deploy **Open WebUI** (port 8080) and connect it locally to the Ollama container via `http://ollama:11434`.
+  - Deploy **PostgreSQL** database container for user data and chat audit logs.
 
 - **⭕ [TODO] Project Portal Development**
-  - Initialize Next.js project with Tailwind CSS
-  - Build the 'Vision' landing page
-  - Configure routing for the AI Chat interface
+  - Initialize the **Monorepo** structure (`apps/web`, `packages/ui`, `packages/database`).
+  - Scaffold a **Next.js 15 (App Router)** frontend utilizing React Server Components for SEO and performance.
+  - Integrate **Prisma** ORM in the backend Controller/Service layer to connect to the PostgreSQL database.
+  - Build the interactive 'Tutor Chat' interface using the functional Atomic Design pattern and Tailwind CSS.
 
 ---
 
