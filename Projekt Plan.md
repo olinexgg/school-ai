@@ -7,9 +7,8 @@
 - **🟢 [DONE] Product Kickoff & Requirements**
   - Interview a teacher/tutor: What are their biggest pain points?
   - Define 3 "Must-Have" features for Tutor Mode (e.g., "No homework answers, only hints")
-  - Define the "Sponsors" (Parents/Teachers) and set a monthly demo schedule
   - Create PRD document
-  - 🔗 *Documentation*: [Phase 1 Kickoff & PRD](docs/planning/phase-1-kickoff.md)
+  - 🔗 *Documentation*: [Product Requirements Document (PRD)](docs/planning/PRD.md)
 
 ---
 

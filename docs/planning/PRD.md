@@ -1,4 +1,4 @@
-# Phase 1: Product Kickoff & Requirements
+# Product Requirements Document (PRD) - Phase 1
 
 ## Overview
 SchoolAI is an offline-first, locally-hosted AI educational platform designed to provide a secure and focused learning environment. The core value proposition is "Tutor Mode"—an AI assistant configured specifically to guide students towards answers rather than completing their assignments for them.
