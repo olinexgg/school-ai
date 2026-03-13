@@ -4,24 +4,24 @@ This document tracks your personal learning journey as you build the SchoolAI pl
 
 ---
 
-## 🟢 LEVEL 1: SYSTEMS & INFRASTRUCTURE (DONE)
+## ⭕ LEVEL 1: SYSTEMS & INFRASTRUCTURE (TODO)
 *These are the foundational skills you've already used to set up the server.*
 
-- **🟢 [DONE] Linux Administration Basics**
+- **⭕ [TODO] Linux Administration Basics**
   - Understand how to install Ubuntu Server and manage partitions (NVMe drives).
   - Understand basic terminal navigation and package management.
-- **🟢 [DONE] Networking Fundamentals**
+- **⭕ [TODO] Networking Fundamentals**
   - Understand MAC addresses and static IP configuration `netplan`.
   - Understand DNS routing (mapping `cloud.fimp.net`).
-- **🟢 [DONE] Secure Access (Google Antigravity)**
+- **⭕ [TODO] Secure Access (Google Antigravity)**
   - Understand the concept of outbound secure tunnels vs. opening inbound firewall ports.
 
 ---
 
-## 🟡 LEVEL 2: DEVOPS & GITOPS (IN PROGRESS)
+## ⭕ LEVEL 2: DEVOPS & GITOPS (TODO)
 *Currently applying these skills.*
 
-- **🟢 [DONE] Architecture Design**
+- **⭕ [TODO] Architecture Design**
   - Understand how to draw visual system components and data flows (Mermaid diagrams).
   - Understand the difference between a Monorepo and a Polyrepo.
 - **⭕ [TODO] Version Control (Git)**
@@ -33,7 +33,7 @@ This document tracks your personal learning journey as you build the SchoolAI pl
 
 ---
 
-## ⭕ LEVEL 3: CONTAINERIZATION (NEXT)
+## ⭕ LEVEL 3: CONTAINERIZATION (TODO)
 *Focus of Phase 3 Execution.*
 
 - **⭕ [TODO] Docker Fundamentals**
@@ -46,7 +46,7 @@ This document tracks your personal learning journey as you build the SchoolAI pl
 
 ---
 
-## ⭕ LEVEL 4: FULL-STACK DEVELOPMENT
+## ⭕ LEVEL 4: FULL-STACK DEVELOPMENT (TODO)
 *Focus of Phase 3 Web Portal.*
 
 - **⭕ [TODO] Modern Frontend React (Next.js 15)**
@@ -59,7 +59,7 @@ This document tracks your personal learning journey as you build the SchoolAI pl
 
 ---
 
-## ⭕ LEVEL 5: AI ENGINEERING
+## ⭕ LEVEL 5: AI ENGINEERING (TODO)
 *Focus of Phase 4 Launch.*
 
 - **⭕ [TODO] Local Inference (Ollama)**
