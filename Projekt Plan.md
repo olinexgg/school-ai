@@ -53,7 +53,7 @@ PHASE 2: PHASE 2: PLANNING
     • Select the appropriate technology stack, including backend frameworks and frontend libraries.
     • Define API contracts and communication protocols between different system modules.
 
-[ ] Mockup Teacher Portal in stitch
+[x] Mockup Teacher Portal in stitch
     • Define the primary user roles and their key workflows within the teacher portal (e.g., managing classes, grading, communication).
     • Sketch initial layouts and wireframes for essential portal screens (dashboard, class management, student view, settings).
     • Utilize a chosen mockup tool (e.g., Figma, Sketch, or a custom "stitch" platform) to create high-fidelity visual mockups.
