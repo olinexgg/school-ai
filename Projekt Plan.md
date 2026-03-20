@@ -74,19 +74,19 @@
 
 ## ⭕ PHASE 3: EXECUTION (TODO)
 
-- **⭕ [IN PROGRESS] Project Portal Development**
+- **⭕ [IN PROGRESS] Coolify Docker management**
+  - Execute the Coolify installation script on Ubuntu Server.
+  - Setup a Pull-based GitOps deployment pipeline connecting Coolify to the `main` GitHub branch.
+  - Configure the Local Docker destination and map securely to `localhost` to avoid open public ports.
+  - Inject required Environment Variables for the AI engine securely via the Coolify dashboard.
+
+- **⭕ [TODO] Project Portal Development**
   - **🟢 [DONE]** Create the `dev` branch as the active staging environment for all Trunk-based development.
   - Initialize the formal **Monorepo** structure (`apps/web`, `packages/ui`, `packages/database`) using standard workspaces.
   - Scaffold a **Next.js 15 (App Router)** frontend utilizing React Server Components for SEO and performance.
   - Configure ESLint, Prettier, and Husky pre-commit hooks for strict quality control.
   - Integrate **Prisma** ORM in the backend Controller/Service layer to connect to the PostgreSQL database.
   - Build the interactive 'Tutor Chat' interface using the functional Atomic Design pattern and Tailwind CSS.
-
-- **⭕ [TODO] Coolify Docker management**
-  - Execute the Coolify installation script on Ubuntu Server.
-  - Setup a Pull-based GitOps deployment pipeline connecting Coolify to the `main` GitHub branch.
-  - Configure the Local Docker destination and map securely to `localhost` to avoid open public ports.
-  - Inject required Environment Variables for the AI engine securely via the Coolify dashboard.
 
 - **⭕ [TODO] Containerization & AI Engine**
   - Install proprietary NVIDIA drivers (v550+) and verify GPU availability via `nvidia-smi`.
