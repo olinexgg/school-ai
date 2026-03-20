@@ -88,7 +88,7 @@
 
 - **⭕ [TODO] Project Portal Development**
   - Initialize the **Monorepo** structure (`apps/web`, `packages/ui`, `packages/database`).
-  - Create the `dev` branch as the active staging environment for all Trunk-based development.
+  - **🟢 [DONE]** Create the `dev` branch as the active staging environment for all Trunk-based development.
   - Scaffold a **Next.js 15 (App Router)** frontend utilizing React Server Components for SEO and performance.
   - Integrate **Prisma** ORM in the backend Controller/Service layer to connect to the PostgreSQL database.
   - Build the interactive 'Tutor Chat' interface using the functional Atomic Design pattern and Tailwind CSS.
