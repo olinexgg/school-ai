@@ -76,7 +76,7 @@
 
 - **⭕ [IN PROGRESS] Coolify Docker management**
   - **🟢 [DONE]** Execute the Coolify installation script on Ubuntu Server.
-  - Setup a Pull-based GitOps deployment pipeline connecting Coolify to the `main` GitHub branch.
+  - **🟢 [DONE]** Setup a Pull-based GitOps deployment pipeline connecting Coolify to the `main` GitHub branch.
   - Configure the Local Docker destination and map securely to `localhost` to avoid open public ports.
   - Inject required Environment Variables for the AI engine securely via the Coolify dashboard.
 
