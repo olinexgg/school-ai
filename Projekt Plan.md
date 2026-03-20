@@ -74,6 +74,14 @@
 
 ## ⭕ PHASE 3: EXECUTION (TODO)
 
+- **⭕ [IN PROGRESS] Project Portal Development**
+  - **🟢 [DONE]** Create the `dev` branch as the active staging environment for all Trunk-based development.
+  - Initialize the formal **Monorepo** structure (`apps/web`, `packages/ui`, `packages/database`) using standard workspaces.
+  - Scaffold a **Next.js 15 (App Router)** frontend utilizing React Server Components for SEO and performance.
+  - Configure ESLint, Prettier, and Husky pre-commit hooks for strict quality control.
+  - Integrate **Prisma** ORM in the backend Controller/Service layer to connect to the PostgreSQL database.
+  - Build the interactive 'Tutor Chat' interface using the functional Atomic Design pattern and Tailwind CSS.
+
 - **⭕ [TODO] Coolify Docker management**
   - Execute the Coolify installation script on Ubuntu Server.
   - Setup a Pull-based GitOps deployment pipeline connecting Coolify to the `main` GitHub branch.
@@ -85,13 +93,6 @@
   - Deploy **Ollama** via Coolify Docker Compose, explicitly mapping GPU access.
   - Deploy **Open WebUI** (port 8080) and connect it locally to the Ollama container via `http://ollama:11434`.
   - Deploy **PostgreSQL** database container for user data and chat audit logs.
-
-- **⭕ [TODO] Project Portal Development**
-  - Initialize the **Monorepo** structure (`apps/web`, `packages/ui`, `packages/database`).
-  - **🟢 [DONE]** Create the `dev` branch as the active staging environment for all Trunk-based development.
-  - Scaffold a **Next.js 15 (App Router)** frontend utilizing React Server Components for SEO and performance.
-  - Integrate **Prisma** ORM in the backend Controller/Service layer to connect to the PostgreSQL database.
-  - Build the interactive 'Tutor Chat' interface using the functional Atomic Design pattern and Tailwind CSS.
 
 ---
 
