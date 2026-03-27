@@ -1,0 +1,10 @@
+{
+  "name": "school-ai-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Monorepo workspace for SchoolAI components encompassing the Web Portal, API layer, and Database connection logic.",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
