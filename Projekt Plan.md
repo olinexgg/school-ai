@@ -82,9 +82,9 @@
 
 - **⭕ [TODO] Project Portal Development**
   - **🟢 [DONE]** Create the `dev` branch as the active staging environment for all Trunk-based development.
-  - Initialize the formal **Monorepo** structure (`apps/web`, `packages/ui`, `packages/database`) using standard workspaces.
-  - Scaffold a **Next.js 15 (App Router)** frontend utilizing React Server Components for SEO and performance.
-  - Configure ESLint, Prettier, and Husky pre-commit hooks for strict quality control.
+  - **🟢 [DONE]** Initialize the formal **Monorepo** structure (`apps/web`, `packages/ui`, `packages/database`) using standard workspaces.
+  - **🟢 [DONE]** Scaffold a **Next.js 15 (App Router)** frontend utilizing React Server Components for SEO and performance.
+  - **🟢 [DONE]** Configure ESLint, Prettier, and Husky pre-commit hooks for strict quality control.
   - Integrate **Prisma** ORM in the backend Controller/Service layer to connect to the PostgreSQL database.
   - Build the interactive 'Tutor Chat' interface using the functional Atomic Design pattern and Tailwind CSS.
 
