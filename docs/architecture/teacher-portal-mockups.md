@@ -3,6 +3,7 @@
 The Teacher Portal is the administrative interface where Sponsors can manage classes and monitor the AI's adherence to the pedagogical rules.
 
 ## A. Dashboard View (Landing)
+
 ```text
 +---------------------------------------------------------+
 | [Logo] SchoolAI Admin            [User] [Settings] [Out]|
@@ -21,6 +22,7 @@ The Teacher Portal is the administrative interface where Sponsors can manage cla
 ```
 
 ## B. Live Session Monitoring (Audit View)
+
 ```text
 +---------------------------------------------------------+
 | < Back to Dashboard | Monitoring: Math 101              |
@@ -38,6 +40,21 @@ The Teacher Portal is the administrative interface where Sponsors can manage cla
 ```
 
 ## C. Key User Workflows defined:
+
 1. **Class Creation**: Teacher creates a "Class", assigns a specific Modelfile (e.g., rigid math tutor vs creative writing brainstormer), and generates an invite link.
 2. **Audit Logging**: All chats are logged to the PostgreSQL database. The "Audit View" allows teachers to verify that the AI is not leaking answers.
 3. **Override**: If the AI gets stuck in a loop, the teacher can manually intervene in the chat stream.
+
+---
+
+## D. High-Fidelity UI Designs
+
+As we transition into Phase 3 Execution, we have generated premium UI visual targets that dictatate our styling structure:
+
+### 1. Student Chat Interface
+
+![Student Chat Interface](assets/student-chat.png)
+
+### 2. Teacher Administrator Dashboard
+
+![Teacher Admin Dashboard](assets/teacher-dash.png)
