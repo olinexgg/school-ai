@@ -86,7 +86,13 @@
   - **🟢 [DONE]** Scaffold a **Next.js 15 (App Router)** frontend utilizing React Server Components for SEO and performance.
   - **🟢 [DONE]** Configure ESLint, Prettier, and Husky pre-commit hooks for strict quality control.
   - **🟢 [DONE]** Integrate **Prisma** ORM in the backend Controller/Service layer to connect to the PostgreSQL database.
-  - Build the interactive 'Tutor Chat' interface using the functional Atomic Design pattern and Tailwind CSS.
+  - **⭕ [TODO]** Build the interactive 'Tutor Chat' interface using the functional Atomic Design pattern and Tailwind CSS.
+    - **⭕ [TODO]** Configure the internal Database Connection (`DATABASE_URL`) from Coolify to Prisma `.env`.
+    - **⭕ [TODO]** Code the Prisma relational schema specifically for `User`, `ChatSession`, and `Message` tables.
+    - **⭕ [TODO]** Push the schema into the PostgreSQL server and create the typescript backend types.
+    - **⭕ [TODO]** Setup the Tailwind CSS design system (Colors, Glassmorphism, Typography).
+    - **⭕ [TODO]** Implement the Next.js standard Landing Page (`/app/page.tsx`).
+    - **⭕ [TODO]** Scaffold and code the dynamic React Chat Interface (`/app/chat/page.tsx`).
 
 - **🟢 [DONE] Containerization & AI Engine**
   - **🟢 [DONE]** Install proprietary NVIDIA drivers (v550+) and verify GPU availability via `nvidia-smi`.

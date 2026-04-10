@@ -10,4 +10,30 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String        @id @default(cuid())
+  email     String        @unique
+  role      String        @default("STUDENT") // STUDENT or TEACHER
+  createdAt DateTime      @default(now())
+  sessions  ChatSession[]
+}
+
+model ChatSession {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id])
+  createdAt DateTime  @default(now())
+  messages  Message[]
+}
+
+model Message {
+  id            String      @id @default(cuid())
+  sessionId     String
+  session       ChatSession @relation(fields: [sessionId], references: [id])
+  role          String      // "user" or "assistant"
+  content       String      // The full text prompt or AI response
+  createdAt     DateTime    @default(now())
 }
