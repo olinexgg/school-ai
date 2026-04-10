@@ -88,11 +88,11 @@
   - **🟢 [DONE]** Integrate **Prisma** ORM in the backend Controller/Service layer to connect to the PostgreSQL database.
   - Build the interactive 'Tutor Chat' interface using the functional Atomic Design pattern and Tailwind CSS.
 
-- **⭕ [IN PROGRESS] Containerization & AI Engine**
+- **🟢 [DONE] Containerization & AI Engine**
   - **🟢 [DONE]** Install proprietary NVIDIA drivers (v550+) and verify GPU availability via `nvidia-smi`.
   - **🟢 [DONE]** Deploy **Ollama** via Coolify Docker Compose, explicitly mapping GPU access.
   - **🟢 [DONE]** Deploy **Open WebUI** (port 3000) and connect it locally to the Ollama container via `http://ollama:11434`.
-  - Deploy **PostgreSQL** database container for user data and chat audit logs.
+  - **🟢 [DONE]** Deploy **PostgreSQL** database container for user data and chat audit logs.
 
 ---
 
