@@ -2,6 +2,17 @@
 
 ---
 
+### 📜 SOURCE OF TRUTH
+
+> **MANDATORY READING FOR AI AGENTS**:
+>
+> 1. [Technical Manual](docs/execution/Phase-3-Technical-Manual.md) (Design Specs)
+> 2. [Task Tracker](home/olinexgg/.gemini/antigravity/brain/6ac24994-805c-4d2e-8118-dd2173e93cc0/task.md) (Step-by-Step execution)
+
+---
+
+---
+
 ## 🟢 PHASE 1: CONCEPT (DONE)
 
 - **🟢 [DONE] Product Kickoff & Requirements**
