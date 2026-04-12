@@ -113,6 +113,23 @@
 
 ---
 
+### ⚡ CODEBASE SYNC ACTION PLAN (NEXT WEEK)
+
+> **STATUS**: There is currently a gap between the _Documentation_ (100% done) and the _Codebase_ (Scaffold only).
+
+- [ ] **Task 2.1: Database Physical Sync**
+  - Run `npx prisma db push` to create tables.
+- [ ] **Task 3.1: UI Design Tokens**
+  - Create `tailwind.config.ts` system with Glassmorphism tokens.
+- [ ] **Task 4.1: UI Component Scaffold**
+  - Create the Atomic components (ChatBubbles, Sidebar).
+- [ ] **Task 5.1: Landing Page Overwrite**
+  - Delete Next.js boilerplate and replace with our "SchoolAI" portal code.
+
+---
+
+---
+
 ## ⭕ PHASE 4: LAUNCH (TODO)
 
 - **⭕ [TODO] Tutor Mode Calibration**
