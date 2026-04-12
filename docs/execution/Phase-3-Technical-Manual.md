@@ -4,6 +4,35 @@ This manual serves as the primary technical reference and documentation guide fo
 
 ---
 
+## 0. Management & Control Architecture
+
+**Goal**: Define the hierarchical relationship between the control plane and the software stack.
+
+The system operates in a three-tier management hierarchy. This ensures the SchoolAI stack remains decoupled from the underlying hardware.
+
+```mermaid
+graph TD
+    Admin([System Admin]) -- "HTTPS (Port 8000)" --> Coolify[Coolify Dashboard]
+    Coolify -- "Docker Socket / API" --> Docker[Docker Engine]
+
+    subgraph "Managed Containers (SchoolAI Stack)"
+        Docker --> Web[Next.js App]
+        Docker --> AI[Ollama GPU]
+        Docker --> DB[PostgreSQL]
+    end
+
+    style Coolify fill:#4f46e5,color:#fff
+    style Docker fill:#2563eb,color:#fff
+```
+
+### Responsibility Layering
+
+1. **Coolify (Control Plane)**: Manages deployments, logs, environment variables, and automated GitHub syncs.
+2. **Docker Engine (Infrastructure)**: Handles resource isolation, GPU passthrough, and networking.
+3. **SchoolAI Stack (Application)**: The business logic that provides the AI tutor service.
+
+---
+
 ## 1. Security & Network Hardening
 
 **Task**: Isolation of AI and Database services from the public internet.
