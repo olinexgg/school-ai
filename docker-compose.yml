@@ -31,6 +31,20 @@ services:
     depends_on:
       - ollama
 
+  db:
+    image: postgres:15-alpine
+    container_name: school-ai-db
+    restart: always
+    environment:
+      - POSTGRES_USER=schooladmin
+      - POSTGRES_PASSWORD=SuperSecretPassword123!
+      - POSTGRES_DB=schoolaidb
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
 volumes:
   ollama_data:
   open_webui_data:
+  postgres_data:

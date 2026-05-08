@@ -85,11 +85,11 @@
 
 ## ⭕ PHASE 3: EXECUTION (TODO)
 
-- **⭕ [IN PROGRESS] Coolify Docker management** (REF: [Manual Section 1](docs/execution/Phase-3-Technical-Manual.md#1-security--network-hardening))
+- **🟢 [DONE] Coolify Docker management** (REF: [Manual Section 1](docs/execution/Phase-3-Technical-Manual.md#1-security--network-hardening))
   - **🟢 [DONE]** Execute the Coolify installation script on Ubuntu Server.
   - **🟢 [DONE]** Setup a Pull-based GitOps deployment pipeline connecting Coolify to the `main` GitHub branch.
-  - Configure the Local Docker destination and map securely to `localhost` to avoid open public ports.
-  - Inject required Environment Variables for the AI engine securely via the Coolify dashboard.
+  - **🟢 [DONE]** Configure the Local Docker destination and map securely to `localhost`.
+  - **🟢 [DONE]** Inject required Environment Variables for the AI engine securely.
 
 - **⭕ [TODO] Project Portal Development**
   - **🟢 [DONE]** Create the `dev` branch as the active staging environment for all Trunk-based development.
@@ -106,9 +106,10 @@
     - **⭕ [TODO]** Scaffold and code the dynamic React Chat Interface (`/app/chat/page.tsx`). (REF: [Manual Section 4](docs/execution/Phase-3-Technical-Manual.md#4-app-logic--interaction-flow))
 
 - **🟢 [DONE] Containerization & AI Engine**
-  - **🟢 [DONE]** Install proprietary NVIDIA drivers (v550+) and verify GPU availability via `nvidia-smi`.
+  - **🟢 [DONE]** Install proprietary NVIDIA drivers (v580-open) and verify GPU availability.
   - **🟢 [DONE]** Deploy **Ollama** via Coolify Docker Compose, explicitly mapping GPU access.
-  - **🟢 [DONE]** Deploy **Open WebUI** (port 3000) and connect it locally to the Ollama container via `http://ollama:11434`.
+  - **🟢 [DONE]** Pull and configure the **Apertus** model as the primary tutor brain.
+  - **🟢 [DONE]** Deploy **Open WebUI** (port 3000) and connect it to Ollama via `10.0.2.2`.
   - **🟢 [DONE]** Deploy **PostgreSQL** database container for user data and chat audit logs.
 
 ---
