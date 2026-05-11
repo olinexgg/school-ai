@@ -10,13 +10,16 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
   id        String        @id @default(cuid())
   email     String        @unique
+  password  String?       // Hashed password
   role      String        @default("STUDENT") // STUDENT or TEACHER
   createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
   sessions  ChatSession[]
 }
 
@@ -25,6 +28,7 @@ model ChatSession {
   userId    String
   user      User      @relation(fields: [userId], references: [id])
   createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   messages  Message[]
 }
 

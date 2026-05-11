@@ -17,5 +17,9 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,css,md}": "prettier --write"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^3.0.63",
+    "ai": "^6.0.176"
   }
 }

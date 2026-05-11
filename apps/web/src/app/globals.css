@@ -1,43 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap');
 @import 'tailwindcss';
 
 @theme {
-  --color-zinc-950: #09090b;
+  --color-zinc-950: #030303;
+  --color-zinc-900: #09090b;
   --color-premium-violet: #8b5cf6;
   --color-premium-blue: #3b82f6;
+  --color-premium-indigo: #6366f1;
+  --color-premium-cyan: #06b6d4;
 
-  --background-image-premium-gradient: linear-gradient(
-    to bottom right,
-    var(--color-zinc-950),
-    #18181b
-  );
+  --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  --font-display: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+
+  --background-image-premium-gradient: linear-gradient(to bottom right, #030303, #09090b, #111111);
+
+  --shadow-premium: 0 0 50px -12px rgba(139, 92, 246, 0.3);
 }
 
 :root {
-  --background: #09090b;
-  --foreground: #fafafa;
+  --background: #030303;
+  --foreground: #ffffff;
 }
 
-body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family:
-    'Inter',
-    system-ui,
-    -apple-system,
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
 }
 
-/* Custom Glassmorphism Utility */
-.glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+@layer utilities {
+  .glass {
+    background: rgba(15, 15, 15, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .glass-lighter {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .text-gradient {
+    background: linear-gradient(to right, var(--color-premium-violet), var(--color-premium-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .bg-gradient-premium {
+    background: linear-gradient(135deg, var(--color-premium-violet), var(--color-premium-blue));
+  }
+
+  .animate-slow-glow {
+    animation: glow 8s ease-in-out infinite alternate;
+  }
 }
 
-.text-gradient {
-  background: linear-gradient(to right, #8b5cf6, #3b82f6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+@keyframes glow {
+  from {
+    opacity: 0.3;
+    transform: scale(1) translate(0, 0);
+  }
+  to {
+    opacity: 0.6;
+    transform: scale(1.1) translate(20px, 10px);
+  }
+}
+
+/* Custom scrollbar for premium feel */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.3);
 }

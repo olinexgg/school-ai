@@ -6,104 +6,20 @@
 
 > **MANDATORY READING FOR AI AGENTS**:
 >
-> 1. [Technical Manual](docs/execution/Phase-3-Technical-Manual.md) (Design Specs)
-> 2. [Task Tracker](home/olinexgg/.gemini/antigravity/brain/6ac24994-805c-4d2e-8118-dd2173e93cc0/task.md) (Step-by-Step execution)
+> 1. [Technical Manual](docs/execution/Phase-3-Technical-Manual.md) (Design Specs)http://192.168.0.119:3001/cture (`apps/web`, `packages/ui`, `packages/database`) using standard workspaces.
 
----
-
----
-
-## 🟢 PHASE 1: CONCEPT (DONE)
-
-- **🟢 [DONE] Product Kickoff & Requirements**
-  - Interview a teacher/tutor: What are their biggest pain points?
-  - Define 3 "Must-Have" features for Tutor Mode (e.g., "No homework answers, only hints")
-  - Define the "Sponsors" (Parents/Teachers) and set a monthly demo schedule
-  - Create PRD document
-  - 🔗 _Documentation_: [Product Requirements Document (PRD)](docs/planning/PRD.md)
-
----
-
-## 🟢 PHASE 2: PLANNING (DONE)
-
-- **🟢 [DONE] Procurement & Physical Setup**
-  - Receive the Captiva PC (i7-14700KF / RTX 5070 Ti)
-  - Install the 2TB NVMe SSD into the second slot
-  - Boot into BIOS and verify both drives are detected
-  - 🔗 _Documentation_: [Infrastructure Topology](docs/architecture/infrastructure-topology.md)
-
-- **🟢 [DONE] Network & Identity Planning**
-  - Map hardware MAC address to cloud.fimp.net
-  - Draft the static identity configuration for netplan
-  - Verify the DNS entry propagation plan
-  - 🔗 _Documentation_: [Infrastructure Topology](docs/architecture/infrastructure-topology.md)
-
-- **🟢 [DONE] Local OS Installation**
-  - Keep Drive A (1TB) for Windows
-  - Flash Ubuntu Server ISO to a USB stick
-  - Install Ubuntu Server on Drive B (2TB)
-  - Configure GRUB to allow booting either OS
-  - 🔗 _Documentation_: [Infrastructure Topology](docs/architecture/infrastructure-topology.md)
-
-- **🟢 [DONE] Install and configure Google Antigravity Agent**
-  - Review system requirements and hardware compatibility for AntigravityAgent
-  - Design the network topology and firewall rules required for agent communication.
-  - Define security protocols and access control lists for the antigravity management console.
-  - Create a detailed configuration checklist for the deployment phase.
-  - 🔗 _Documentation_: [Infrastructure Topology](docs/architecture/infrastructure-topology.md)
-
-- **🟢 [DONE] GitOps Strategy Expansion**
-  - Establish a Pull-based GitOps deployment model via Coolify
-  - Set a 60-second reconciliation loop interval for state drift checks
-  - Manage secrets securely via Coolify environment variables
-  - Configure CI/CD pipeline with GitHub Actions (linting) and Webhook auto-deployments
-  - 🔗 _Documentation_: [GitOps Strategy](docs/architecture/gitops-strategy.md)
-
-- **🟢 [DONE] Codebase Strategy Expansion**
-  - Implement a Monorepo architecture for the web portal and AI components
-  - Establish a Trunk-based development branching model (`dev` -> `main`)
-  - Enforce quality control using Prettier, ESLint, and Husky pre-commit hooks
-  - Design scalable Frontend (React Server Components) and Backend (Controller/Service) flow
-  - 🔗 _Documentation_: [Codebase Strategy](docs/architecture/codebase-strategy.md)
-
-- **🟢 [DONE] Create Architecture Designs**
-  - Select Next.js 15 (App Router) and Tailwind CSS for the Frontend portal
-  - Select Node.js API Routes and PostgreSQL database for the Backend
-  - Select Ollama (GPU Accelerated) and Open WebUI for the AI Inference layer
-  - Define RESTful API contracts passing between Next.js, the backend, and Ollama
-  - 🔗 _Documentation_: [System Design](docs/architecture/system-design.md)
-
-- **🟢 [DONE] Mockup Teacher Portal in stitch**
-  - Define the primary user roles and their key workflows within the teacher portal (e.g., managing classes, grading, communication).
-  - Sketch initial layouts and wireframes for essential portal screens (dashboard, class management, student view, settings).
-  - Utilize a chosen mockup tool (e.g., Figma, Sketch, or a custom "stitch" platform) to create high-fidelity visual mockups.
-  - Incorporate branding guidelines and basic UI components (buttons, forms, navigation) into the mockups.
-  - Conduct an internal review with stakeholders to gather initial feedback on usability and design direction.
-  - 🔗 _Documentation_: [Teacher Portal Mockups](docs/architecture/teacher-portal-mockups.md)
-
----
-
-## ⭕ PHASE 3: EXECUTION (TODO)
-
-- **🟢 [DONE] Coolify Docker management** (REF: [Manual Section 1](docs/execution/Phase-3-Technical-Manual.md#1-security--network-hardening))
-  - **🟢 [DONE]** Execute the Coolify installation script on Ubuntu Server.
-  - **🟢 [DONE]** Setup a Pull-based GitOps deployment pipeline connecting Coolify to the `main` GitHub branch.
-  - **🟢 [DONE]** Configure the Local Docker destination and map securely to `localhost`.
-  - **🟢 [DONE]** Inject required Environment Variables for the AI engine securely.
-
-- **⭕ [TODO] Project Portal Development**
-  - **🟢 [DONE]** Create the `dev` branch as the active staging environment for all Trunk-based development.
-  - **🟢 [DONE]** Initialize the formal **Monorepo** structure (`apps/web`, `packages/ui`, `packages/database`) using standard workspaces.
-  - **🟢 [DONE]** Scaffold a **Next.js 15 (App Router)** frontend utilizing React Server Components for SEO and performance.
-  - **🟢 [DONE]** Configure ESLint, Prettier, and Husky pre-commit hooks for strict quality control.
-  - **🟢 [DONE]** Integrate **Prisma** ORM in the backend Controller/Service layer to connect to the PostgreSQL database.
-  - **⭕ [TODO]** Build the interactive 'Tutor Chat' interface using the functional Atomic Design pattern and Tailwind CSS. (REF: [Manual Section 3 & 4](docs/execution/Phase-3-Technical-Manual.md#3-premium-ui--design-system))
-    - **⭕ [TODO]** Configure the internal Database Connection (`DATABASE_URL`) from Coolify to Prisma `.env`. (REF: [Manual Section 1](docs/execution/Phase-3-Technical-Manual.md#1-security--network-hardening))
-    - **⭕ [TODO]** Code the Prisma relational schema specifically for `User`, `ChatSession`, and `Message` tables. (REF: [Manual Section 2](docs/execution/Phase-3-Technical-Manual.md#2-relational-database-integration))
-    - **⭕ [TODO]** Push the schema into the PostgreSQL server and create the typescript backend types.
-    - **⭕ [TODO]** Setup the Tailwind CSS design system (Colors, Glassmorphism, Typography). (REF: [Manual Section 3](docs/execution/Phase-3-Technical-Manual.md#3-premium-ui--design-system))
-    - **⭕ [TODO]** Implement the Next.js standard Landing Page (`/app/page.tsx`).
-    - **⭕ [TODO]** Scaffold and code the dynamic React Chat Interface (`/app/chat/page.tsx`). (REF: [Manual Section 4](docs/execution/Phase-3-Technical-Manual.md#4-app-logic--interaction-flow))
+- **🟢 [DONE]** Scaffold a **Next.js 15 (App Router)** frontend utilizing React Server Components for SEO and performance.
+- **🟢 [DONE]** Configure ESLint, Prettier, and Husky pre-commit hooks for strict quality control.
+- **🟢 [DONE]** Integrate **Prisma** ORM in the backend Controller/Service layer to connect to the PostgreSQL database.
+- **🟢 [DONE]** Build the functional 'Tutor Chat' logic and database persistence.
+- **🟢 [DONE]** Configure the internal Database Connection (`DATABASE_URL`) from Coolify to Prisma `.env`.
+- **🟢 [DONE]** Code the Prisma relational schema specifically for `User`, `ChatSession`, and `Message` tables.
+- **🟢 [DONE]** Push the schema into the PostgreSQL server and create the typescript backend types.
+- **🟢 [DONE]** Setup the Tailwind CSS design system (Colors, Glassmorphism, Typography). (REF: [Manual Section 3](docs/execution/Phase-3-Technical-Manual.md#3-premium-ui--design-system))
+- **🟢 [DONE]** Implement the Next.js standard Landing Page (`/app/page.tsx`).
+- **🟢 [DONE]** Finalize the Premium React Chat Interface UI (`/app/chat/page.tsx`).
+- **🟢 [DONE]** Build the Teacher Dashboard & Audit View (`/app/teacher`).
+- **🟢 [DONE]** Create Teacher Audit APIs for session monitoring.
 
 - **🟢 [DONE] Containerization & AI Engine**
   - **🟢 [DONE]** Install proprietary NVIDIA drivers (v580-open) and verify GPU availability.
@@ -114,24 +30,24 @@
 
 ---
 
-### ⚡ CODEBASE SYNC ACTION PLAN (NEXT WEEK)
+### ⚡ CODEBASE SYNC ACTION PLAN (DONE)
 
-> **STATUS**: There is currently a gap between the _Documentation_ (100% done) and the _Codebase_ (Scaffold only).
+> **STATUS**: Logic, Database, and UI/UX are 100% complete and stabilized. Moving to Phase 4 (Calibration).
 
-- [ ] **Task 2.1: Database Physical Sync**
+- [x] **Task 2.1: Database Physical Sync**
   - Run `npx prisma db push` to create tables.
-- [ ] **Task 3.1: UI Design Tokens**
+- [x] **Task 3.1: UI Design Tokens**
   - Create `tailwind.config.ts` system with Glassmorphism tokens.
-- [ ] **Task 4.1: UI Component Scaffold**
+- [x] **Task 4.1: UI Component Scaffold**
   - Create the Atomic components (ChatBubbles, Sidebar).
-- [ ] **Task 5.1: Landing Page Overwrite**
+- [x] **Task 5.1: Landing Page Overwrite**
   - Delete Next.js boilerplate and replace with our "SchoolAI" portal code.
 
 ---
 
 ---
 
-## ⭕ PHASE 4: LAUNCH (TODO)
+## ⭕ PHASE 4: LAUNCH (IN PROGRESS)
 
 - **⭕ [TODO] Tutor Mode Calibration**
   - Draft and test the 'No homework answers' System Prompt
