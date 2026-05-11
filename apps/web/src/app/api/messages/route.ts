@@ -21,8 +21,10 @@ export async function GET(req: Request) {
       select: { userId: true }
     })
 
+    // No row yet: client UUID before first message — return empty history (not 404),
+    // otherwise the chat page would spin forever rotating session IDs.
     if (!session) {
-      return Response.json({ error: 'Not found' }, { status: 404 })
+      return Response.json([])
     }
 
     const isOwner = session.userId === user.id

@@ -16,13 +16,18 @@ function BarInner() {
 
   const refresh = useCallback(() => {
     fetch('/api/teacher/presentation-status', { credentials: 'include' })
-      .then((r) => r.json())
-      .then((d) => {
+      .then(async (r) => {
+        const d = await r.json().catch(() => null)
         if (d && typeof d.unlocked === 'boolean') {
           setStatus({ unlocked: d.unlocked, pinConfigured: Boolean(d.pinConfigured) })
+        } else {
+          // Assume open mode so the bar stays usable if the endpoint errors mid-demo.
+          setStatus({ unlocked: true, pinConfigured: false })
         }
       })
-      .catch(() => {})
+      .catch(() => {
+        setStatus({ unlocked: true, pinConfigured: false })
+      })
   }, [])
 
   useEffect(() => {

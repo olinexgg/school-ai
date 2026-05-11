@@ -54,7 +54,9 @@ export default function ChatPage() {
           router.push('/login?next=/chat')
           return null
         }
-        if (res.status === 403 || res.status === 404) {
+        // Wrong owner / policy — pick a fresh session id. Do not treat 404 here:
+        // new chats have no ChatSession row until the first message is sent.
+        if (res.status === 403) {
           const nextId = crypto.randomUUID()
           localStorage.setItem('schoolai_current_session', nextId)
           setSessionId(nextId)
