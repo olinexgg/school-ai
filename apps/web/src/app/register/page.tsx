@@ -32,12 +32,15 @@ export default function RegisterPage() {
 
       const data = await res.json()
       if (res.ok) {
+        if (data.user) {
+          localStorage.setItem('schoolai_user', JSON.stringify(data.user))
+        }
         setSuccess(true)
-        setTimeout(() => router.push('/login'), 2000)
+        setTimeout(() => router.push('/chat'), 1500)
       } else {
         setError(data.error || 'Registration failed')
       }
-    } catch (err) {
+    } catch {
       setError('Connection error')
     } finally {
       setLoading(false)
@@ -68,7 +71,7 @@ export default function RegisterPage() {
 
           {success && (
             <div className="mb-6 p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold text-center">
-              Registration successful! Redirecting...
+              Registration successful! Taking you to the tutor…
             </div>
           )}
 

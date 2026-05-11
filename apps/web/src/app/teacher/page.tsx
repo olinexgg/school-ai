@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 interface AuditSession {
   id: string
@@ -17,12 +18,23 @@ interface AuditSession {
 }
 
 export default function TeacherDashboard() {
+  const router = useRouter()
   const [sessions, setSessions] = useState<AuditSession[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('/api/teacher/sessions')
-      .then((res) => res.json())
+    fetch('/api/teacher/sessions', { credentials: 'include' })
+      .then((res) => {
+        if (res.status === 401) {
+          router.push('/login?next=/teacher')
+          return null
+        }
+        if (res.status === 403) {
+          router.push('/chat')
+          return null
+        }
+        return res.json()
+      })
       .then((data) => {
         if (Array.isArray(data)) setSessions(data)
         setLoading(false)
@@ -31,7 +43,7 @@ export default function TeacherDashboard() {
         console.error('Audit Load Error:', err)
         setLoading(false)
       })
-  }, [])
+  }, [router])
 
   return (
     <div className="min-h-screen bg-zinc-950 text-white font-sans selection:bg-premium-blue/30">

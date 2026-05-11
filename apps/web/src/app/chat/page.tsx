@@ -1,30 +1,40 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { useChat } from '@ai-sdk/react'
+import { DefaultChatTransport } from 'ai'
 import { Sidebar } from '../../components/chat/Sidebar'
 import { ChatBubble } from '../../components/chat/ChatBubble'
 import { ChatInput } from '../../components/chat/ChatInput'
 import { translations, Language } from '../../lib/translations'
 
 export default function ChatPage() {
+  const router = useRouter()
   const [sessionId, setSessionId] = useState<string | undefined>(undefined)
   const [language, setLanguage] = useState<Language>('de')
 
   const t = React.useMemo(() => translations[language], [language])
 
+  const transport = React.useMemo(
+    () => new DefaultChatTransport({ credentials: 'include' }),
+    []
+  )
+
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    queueMicrotask(() => {
+      if (typeof window === 'undefined') return
       const savedId = localStorage.getItem('schoolai_current_session')
       const savedLang = localStorage.getItem('schoolai_language') as Language
 
-      setSessionId(savedId || Math.random().toString(36).substring(7))
+      setSessionId(savedId || crypto.randomUUID())
       if (savedLang) setLanguage(savedLang)
-    }
+    })
   }, [])
 
   const { messages, sendMessage, status, error, clearError, setMessages } = useChat({
-    id: sessionId
+    id: sessionId,
+    transport
   })
 
   const [input, setInput] = useState('')
@@ -33,22 +43,36 @@ export default function ChatPage() {
   const isLoading = status === 'submitted' || status === 'streaming'
 
   useEffect(() => {
-    if (sessionId) {
-      fetch(`/api/messages?sessionId=${sessionId}`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (Array.isArray(data)) {
-            const formattedMessages = data.map((m) => ({
-              id: m.id,
-              role: m.role as 'user' | 'assistant',
-              parts: [{ type: 'text' as const, text: m.content }]
-            }))
-            setMessages(formattedMessages)
-          }
-        })
-        .catch((err) => console.error('Error loading historical messages:', err))
-    }
-  }, [sessionId, setMessages])
+    if (!sessionId) return
+
+    fetch(`/api/messages?sessionId=${encodeURIComponent(sessionId)}`, {
+      credentials: 'include'
+    })
+      .then((res) => {
+        if (res.status === 401) {
+          router.push('/login?next=/chat')
+          return null
+        }
+        if (res.status === 403 || res.status === 404) {
+          const nextId = crypto.randomUUID()
+          localStorage.setItem('schoolai_current_session', nextId)
+          setSessionId(nextId)
+          setMessages([])
+          return null
+        }
+        return res.json()
+      })
+      .then((data) => {
+        if (!data || !Array.isArray(data)) return
+        const formattedMessages = data.map((m) => ({
+          id: m.id,
+          role: m.role as 'user' | 'assistant',
+          parts: [{ type: 'text' as const, text: m.content }]
+        }))
+        setMessages(formattedMessages)
+      })
+      .catch((err) => console.error('Error loading historical messages:', err))
+  }, [sessionId, setMessages, router])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInput(e.target.value)
@@ -65,7 +89,7 @@ export default function ChatPage() {
   }
 
   const handleNewChat = () => {
-    const newId = Math.random().toString(36).substring(7)
+    const newId = crypto.randomUUID()
     localStorage.setItem('schoolai_current_session', newId)
     setSessionId(newId)
     setMessages([])
@@ -133,7 +157,7 @@ export default function ChatPage() {
                   const textContent =
                     m.parts
                       ?.filter((part) => part.type === 'text')
-                      .map((part) => (part as any).text)
+                      .map((part) => ('text' in part ? part.text : ''))
                       .join('') || ''
 
                   return (

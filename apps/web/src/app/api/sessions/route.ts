@@ -1,10 +1,15 @@
 import { db } from 'database'
+import { getSessionUser } from '../../../lib/server-auth'
 
 export async function GET() {
   try {
-    // Hole alle Sessions für den Demo-User
+    const user = await getSessionUser()
+    if (!user) {
+      return Response.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
     const sessions = await db.chatSession.findMany({
-      where: { userId: 'demo-user-1' },
+      where: { userId: user.id },
       orderBy: { updatedAt: 'desc' },
       include: {
         messages: {

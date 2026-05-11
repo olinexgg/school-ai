@@ -1,5 +1,7 @@
 import { db } from 'database'
 import bcrypt from 'bcryptjs'
+import { cookies } from 'next/headers'
+import { SESSION_COOKIE_NAME, sessionCookieOptions } from '../../../../lib/auth-cookie'
 
 export async function POST(req: Request) {
   try {
@@ -30,7 +32,16 @@ export async function POST(req: Request) {
       }
     })
 
-    return Response.json({ message: 'User created successfully', userId: user.id })
+    ;(await cookies()).set(SESSION_COOKIE_NAME, user.id, sessionCookieOptions())
+
+    return Response.json({
+      message: 'User created successfully',
+      user: {
+        id: user.id,
+        email: user.email,
+        role: user.role
+      }
+    })
   } catch (error) {
     console.error('Registration Error:', error)
     return Response.json({ error: 'Failed to register user' }, { status: 500 })

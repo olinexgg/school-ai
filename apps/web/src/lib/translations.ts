@@ -10,7 +10,6 @@ export const translations = {
     inputPlaceholder: 'Frag Apertus etwas...',
     errorTitle: 'Ein Fehler ist aufgetreten',
     delete: 'Löschen',
-    demoUser: 'Demo Nutzer',
     emptySession: 'Leere Sitzung',
     noSessions: 'Noch keine Sitzungen'
   },
@@ -25,7 +24,6 @@ export const translations = {
     inputPlaceholder: 'Ask Apertus anything...',
     errorTitle: 'An error occurred',
     delete: 'Delete',
-    demoUser: 'Demo User',
     emptySession: 'Empty Session',
     noSessions: 'No sessions yet'
   }

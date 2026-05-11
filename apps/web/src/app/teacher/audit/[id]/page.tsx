@@ -19,7 +19,9 @@ export default function AuditSessionPage() {
 
   useEffect(() => {
     if (id) {
-      fetch(`/api/messages?sessionId=${id}`)
+      fetch(`/api/messages?sessionId=${encodeURIComponent(String(id))}`, {
+        credentials: 'include'
+      })
         .then((res) => res.json())
         .then((data) => {
           if (Array.isArray(data)) setMessages(data)

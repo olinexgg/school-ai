@@ -1,6 +1,7 @@
 import { db } from 'database'
 import bcrypt from 'bcryptjs'
 import { cookies } from 'next/headers'
+import { SESSION_COOKIE_NAME, sessionCookieOptions } from '../../../../lib/auth-cookie'
 
 export async function POST(req: Request) {
   try {
@@ -20,13 +21,7 @@ export async function POST(req: Request) {
       return Response.json({ error: 'Invalid credentials' }, { status: 401 })
     }
 
-    // Set a simple cookie (In a production app, use JWT)
-    ;(await cookies()).set('schoolai_user_id', user.id, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: 60 * 60 * 24 * 7 // 1 week
-    })
+    ;(await cookies()).set(SESSION_COOKIE_NAME, user.id, sessionCookieOptions())
 
     return Response.json({
       user: {

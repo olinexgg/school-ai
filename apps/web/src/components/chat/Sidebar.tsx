@@ -1,7 +1,8 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { translations, Language } from '../../lib/translations'
 
 interface Session {
@@ -25,23 +26,46 @@ export function Sidebar({
   language,
   onLanguageChange
 }: SidebarProps) {
+  const router = useRouter()
   const [sessions, setSessions] = useState<Session[]>([])
+  const [accountEmail, setAccountEmail] = useState<string | null>(null)
   const t = translations[language]
 
-  const fetchSessions = () => {
-    fetch('/api/sessions')
-      .then((res) => res.json())
+  const fetchSessions = useCallback(() => {
+    fetch('/api/sessions', { credentials: 'include' })
+      .then((res) => {
+        if (res.status === 401) {
+          router.push('/login?next=/chat')
+          return null
+        }
+        return res.json()
+      })
       .then((data) => {
         if (Array.isArray(data)) setSessions(data)
       })
       .catch((err) => console.error('Error fetching sessions:', err))
-  }
+  }, [router])
+
+  useEffect(() => {
+    fetch('/api/auth/me', { credentials: 'include' })
+      .then((res) => {
+        if (res.status === 401) {
+          router.push('/login?next=/chat')
+          return null
+        }
+        return res.json()
+      })
+      .then((data) => {
+        if (data?.user?.email) setAccountEmail(data.user.email)
+      })
+      .catch(() => {})
+  }, [router])
 
   useEffect(() => {
     fetchSessions()
     const interval = setInterval(fetchSessions, 10000)
     return () => clearInterval(interval)
-  }, [])
+  }, [fetchSessions])
 
   return (
     <aside className="hidden lg:flex w-80 h-full border-r border-white/5 bg-zinc-950/80 backdrop-blur-2xl flex-col z-30">
@@ -138,13 +162,25 @@ export function Sidebar({
         </button>
 
         <div className="flex items-center justify-between px-2">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center text-xs border border-white/5 text-zinc-400 font-bold">
-              DU
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-8 h-8 shrink-0 rounded-full bg-zinc-800 flex items-center justify-center text-xs border border-white/5 text-zinc-400 font-bold">
+              {(accountEmail || 'U').slice(0, 2).toUpperCase()}
             </div>
-            <span className="text-xs font-bold text-zinc-400">{t.demoUser}</span>
+            <span className="text-xs font-bold text-zinc-400 truncate" title={accountEmail || undefined}>
+              {accountEmail || '…'}
+            </span>
           </div>
-          <button className="text-zinc-600 hover:text-white transition-colors p-2 hover:bg-white/5 rounded-lg">
+          <button
+            type="button"
+            title="Log out"
+            onClick={() =>
+              fetch('/api/auth/logout', { method: 'POST', credentials: 'include' }).then(() => {
+                localStorage.removeItem('schoolai_user')
+                router.push('/login')
+              })
+            }
+            className="text-zinc-600 hover:text-white transition-colors p-2 hover:bg-white/5 rounded-lg"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"

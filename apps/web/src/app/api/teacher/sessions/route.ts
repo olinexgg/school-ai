@@ -1,8 +1,16 @@
 import { db } from 'database'
+import { getSessionUser } from '../../../../lib/server-auth'
 
 export async function GET() {
   try {
-    // Hole alle Sessions inklusive Nutzer-Infos und der letzten Nachricht
+    const user = await getSessionUser()
+    if (!user) {
+      return Response.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+    if (user.role !== 'TEACHER') {
+      return Response.json({ error: 'Forbidden' }, { status: 403 })
+    }
+
     const sessions = await db.chatSession.findMany({
       include: {
         user: true,

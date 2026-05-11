@@ -1,22 +1,30 @@
 import { createOpenAI } from '@ai-sdk/openai'
 import { streamText, UIMessage } from 'ai'
 import { db } from 'database'
+import { getSessionUser } from '../../../lib/server-auth'
 
-// 1. Initialisiere den OpenAI-Provider mit der Ollama Basis-URL
 const ollama = createOpenAI({
   baseURL: 'http://127.0.0.1:11435/v1',
-  apiKey: 'ollama' // apiKey wird von Ollama ignoriert, ist aber für die Bibliothek nötig
+  apiKey: 'ollama'
 })
 
 export async function POST(req: Request) {
   try {
+    const user = await getSessionUser()
+    if (!user) {
+      return Response.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
     const {
       messages,
       id: chatId,
       language = 'de'
     }: { messages: UIMessage[]; id?: string; language?: string } = await req.json()
 
-    // Sanitize messages for AI SDK compatibility
+    if (!chatId) {
+      return Response.json({ error: 'Chat session id is required' }, { status: 400 })
+    }
+
     const sanitizedMessages = messages.map((m) => ({
       ...m,
       content:
@@ -26,32 +34,32 @@ export async function POST(req: Request) {
           .join('') || ''
     }))
 
-    // 2. Erstelle/Hole Demo-User
-    const user = await db.user.upsert({
-      where: { email: 'demo@schoolai.local' },
-      update: {},
-      create: {
-        id: 'demo-user-1',
-        email: 'demo@schoolai.local',
-        role: 'STUDENT'
-      }
+    const existing = await db.chatSession.findUnique({
+      where: { id: chatId },
+      select: { userId: true }
     })
 
-    // 3. Hole oder erstelle eine Chat-Session
-    const sessionId = chatId || 'demo-session-1'
-
-    const session = await db.chatSession.upsert({
-      where: { id: sessionId },
-      update: {
-        updatedAt: new Date()
-      },
-      create: {
-        id: sessionId,
-        userId: user.id
+    if (existing) {
+      if (existing.userId !== user.id) {
+        return Response.json({ error: 'Forbidden' }, { status: 403 })
       }
+      await db.chatSession.update({
+        where: { id: chatId },
+        data: { updatedAt: new Date() }
+      })
+    } else {
+      await db.chatSession.create({
+        data: {
+          id: chatId,
+          userId: user.id
+        }
+      })
+    }
+
+    const session = await db.chatSession.findUniqueOrThrow({
+      where: { id: chatId }
     })
 
-    // Letzte Nachricht des Users in der DB speichern
     const lastUserMessage = sanitizedMessages[sanitizedMessages.length - 1]
     if (lastUserMessage && lastUserMessage.role === 'user') {
       await db.message.create({
@@ -82,7 +90,6 @@ export async function POST(req: Request) {
         Antworte immer auf Deutsch.
       `
 
-    // AI-Aufruf
     const result = await streamText({
       model: ollama('apertus-tutor'),
       messages: sanitizedMessages,
