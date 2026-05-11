@@ -1,6 +1,23 @@
 # SchoolAI — Lehrerportal (einfache Schritte)
 
-Für **Lehrkräfte** ohne IT-Kenntnisse. Lesen Sie zuerst nur die **nummerierten Schritte**.
+Für **Lehrkräfte** ohne IT-Kenntnisse. Lesen Sie zuerst **„Worum geht es?“**, danach die **nummerierten Schritte**.
+
+---
+
+## Worum geht es? — Die Plattform in Kürze
+
+**SchoolAI** ist eine **Schul-Plattform** mit einem **KI-Tutor im Chat**. Die Plattform ist in erster Linie für **Kinder und Jugendliche** gedacht: Sie können Fragen stellen, Übungen besprechen und sich erklären lassen — ähnlich wie Hausaufgabenhilfe oder Nachhilfe, aber am Computer.
+
+**Für wen ist was?**
+
+| Für **Schülerinnen und Schüler**                    | Für **Lehrkräfte** (Sie)                                                                                              |
+| --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Chat mit dem Tutor (Hauptbildschirm nach dem Login) | **Extra-Bereich** nach der **PIN**: Lehrer-Dashboard                                                                  |
+| Eigener Account, eigener Verlauf                    | **Überblick**, wer aktiv war                                                                                          |
+| Keine Lehrer-PIN nötig                              | Gespräche **einzeln lesen** (Audit), wenn die Schule das vorsieht                                                     |
+| —                                                   | **Chat-Schutz**: Regeln, wie der Tutor antworten soll (z. B. weniger fertige Lösungen) — gilt für die Klasse / Schule |
+
+Der **Lehrer-Teil** ist absichtlich **geschützt** (gelbe Leiste + PIN): Damit nicht jede Person am gleichen PC aus Versehen oder ohne Erlaubnis Einstellungen oder Übersichten sieht. **Schüler** nutzen normalerweise nur den **Chat** — nicht das Dashboard.
 
 ---
 
@@ -49,11 +66,13 @@ Für **Lehrkräfte** ohne IT-Kenntnisse. Lesen Sie zuerst nur die **nummerierten
 
 ---
 
-## Wozu das Portal?
+## Wozu das Portal? — die Lehrer-Optionen im Überblick
+
+Das sind die drei Hauptfunktionen aus der Spalte **„Für Lehrkräfte“** weiter oben:
 
 - **Überblick:** Wer war im Chat?
 - **Gespräch lesen:** Eine Sitzung öffnen.
-- **Chat-Schutz:** Regeln für alle (siehe oben).
+- **Chat-Schutz:** Regeln für alle (siehe Schritte unten).
 
 ---
 
