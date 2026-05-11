@@ -32,7 +32,7 @@ export default function TeacherDashboard() {
         if (res.status === 403) {
           const body = await res.json().catch(() => ({}))
           if (body?.code === 'TEACHER_PIN_REQUIRED') {
-            router.push('/teacher/unlock?next=%2Fteacher')
+            router.push('/chat?teacherPin=1')
             return null
           }
           router.push('/chat')

@@ -1,5 +1,5 @@
 import { db } from 'database'
-import { requireTeacherWithGate } from '../../../../lib/teacher-api-guard'
+import { requireTeacherPresentationMode } from '../../../../lib/teacher-presentation'
 import type { TeacherPolicyFlags } from '../../../../lib/teacher-policy-prompt'
 
 const keys: (keyof TeacherPolicyFlags)[] = [
@@ -10,7 +10,7 @@ const keys: (keyof TeacherPolicyFlags)[] = [
 ]
 
 export async function GET() {
-  const gate = await requireTeacherWithGate()
+  const gate = await requireTeacherPresentationMode()
   if (!gate.ok) {
     return Response.json({ error: gate.error, code: gate.code }, { status: gate.status })
   }
@@ -37,7 +37,7 @@ export async function GET() {
 }
 
 export async function PATCH(req: Request) {
-  const gate = await requireTeacherWithGate()
+  const gate = await requireTeacherPresentationMode()
   if (!gate.ok) {
     return Response.json({ error: gate.error, code: gate.code }, { status: gate.status })
   }

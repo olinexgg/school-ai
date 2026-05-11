@@ -1,9 +1,9 @@
 import { db } from 'database'
-import { requireTeacherWithGate } from '../../../../lib/teacher-api-guard'
+import { requireTeacherPresentationMode } from '../../../../lib/teacher-presentation'
 
 export async function GET() {
   try {
-    const gate = await requireTeacherWithGate()
+    const gate = await requireTeacherPresentationMode()
     if (!gate.ok) {
       return Response.json({ error: gate.error, code: gate.code }, { status: gate.status })
     }

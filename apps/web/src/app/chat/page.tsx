@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useChat } from '@ai-sdk/react'
 import { DefaultChatTransport } from 'ai'
+import { PresentationTeacherBar } from '../../components/teacher/PresentationTeacherBar'
 import { Sidebar } from '../../components/chat/Sidebar'
 import { ChatBubble } from '../../components/chat/ChatBubble'
 import { ChatInput } from '../../components/chat/ChatInput'
@@ -110,7 +111,9 @@ export default function ChatPage() {
   }, [messages])
 
   return (
-    <div className="flex h-screen w-full bg-zinc-950 overflow-hidden">
+    <div className="flex h-screen w-full flex-col bg-zinc-950 overflow-hidden">
+      <PresentationTeacherBar />
+      <div className="flex flex-1 min-h-0 w-full overflow-hidden">
       <Sidebar
         onNewChat={handleNewChat}
         onSessionSelect={handleSessionSelect}
@@ -190,6 +193,7 @@ export default function ChatPage() {
           placeholder={t.inputPlaceholder}
         />
       </main>
+      </div>
     </div>
   )
 }

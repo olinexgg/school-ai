@@ -1,6 +1,6 @@
 import { db } from 'database'
 import { getSessionUser } from '../../../lib/server-auth'
-import { requireTeacherWithGate } from '../../../lib/teacher-api-guard'
+import { requireTeacherPresentationMode } from '../../../lib/teacher-presentation'
 
 export async function GET(req: Request) {
   try {
@@ -26,15 +26,10 @@ export async function GET(req: Request) {
     }
 
     const isOwner = session.userId === user.id
-    const isTeacher = user.role === 'TEACHER'
-    if (!isOwner && !isTeacher) {
-      return Response.json({ error: 'Forbidden' }, { status: 403 })
-    }
-
-    if (isTeacher && !isOwner) {
-      const gate = await requireTeacherWithGate()
-      if (!gate.ok) {
-        return Response.json({ error: gate.error, code: gate.code }, { status: gate.status })
+    if (!isOwner) {
+      const mode = await requireTeacherPresentationMode()
+      if (!mode.ok) {
+        return Response.json({ error: mode.error, code: mode.code }, { status: mode.status })
       }
     }
 

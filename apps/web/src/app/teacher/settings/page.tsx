@@ -41,7 +41,7 @@ export default function TeacherSettingsPage() {
     fetch('/api/teacher/policy', { credentials: 'include' })
       .then((res) => {
         if (res.status === 403) {
-          router.push('/teacher/unlock?next=%2Fteacher%2Fsettings')
+          router.push('/chat?teacherPin=1')
           return null
         }
         return res.json()
@@ -72,7 +72,7 @@ export default function TeacherSettingsPage() {
         body: JSON.stringify(policy)
       })
       if (res.status === 403) {
-        router.push('/teacher/unlock?next=%2Fteacher%2Fsettings')
+        router.push('/chat?teacherPin=1')
         return
       }
       if (!res.ok) {

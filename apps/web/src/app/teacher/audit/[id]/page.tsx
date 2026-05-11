@@ -27,9 +27,7 @@ export default function AuditSessionPage() {
           if (res.status === 403) {
             const body = await res.json().catch(() => ({}))
             if (body?.code === 'TEACHER_PIN_REQUIRED') {
-              router.push(
-                '/teacher/unlock?next=' + encodeURIComponent(`/teacher/audit/${String(id)}`)
-              )
+              router.push('/chat?teacherPin=1')
               return null
             }
           }
