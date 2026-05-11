@@ -31,7 +31,16 @@ SchoolAI is a premium educational platform designed to help students learn more 
 └── Projekt Plan.md     # Master project roadmap
 ```
 
-## ⚙️ Setup & Installation
+## 🔄 Technical Workflow (How it works)
+
+1. **User Interaction:** The student sends a message via the Next.js frontend.
+2. **Backend Processing:** The request is handled by a Next.js API Route, which fetches the chat history from PostgreSQL.
+3. **Socratic Guardrails:** The system applies the "Apertus Persona" (System Prompt) ensuring no direct answers are given.
+4. **AI Inference:** The sanitized request is sent to the local **Ollama** server, which utilizes the RTX GPU for high-speed response generation.
+5. **Real-time Streaming:** The AI's response is streamed back to the user word-by-word for a seamless experience.
+6. **Persistent Audit:** Every interaction is saved back to the database for teacher review.
+
+## 🛠 Tech Stack
 
 ### Prerequisites
 
