@@ -1,0 +1,35 @@
+SchoolAI — Kurzanleitung für Lehrkräfte (für Google Docs einfügen)
+
+
+WAS IST DAS?
+SchoolAI ist eine Schul-Plattform mit KI-Tutor im Chat. Hauptsache für Kinder und Jugendliche: Fragen stellen, üben, sich etwas erklären lassen. Lehrkräfte haben zusätzlich einen geschützten Bereich (PIN): Übersicht, Gespräche nachlesen, Regeln für den Tutor (Chat-Schutz).
+
+
+WER MACHT WAS?
+• Schülerinnen und Schüler: Chat nach dem Login — eigenes Konto, eigener Verlauf.
+• Lehrkräfte: Nach PIN das Lehrer-Dashboard — Übersicht, einzelne Chats ansehen, Chat-Schutz einstellen. Die PIN schützt am gemeinsamen PC.
+
+
+SO ÖFFNEN SIE DAS LEHRERPORTAL
+1. Browser öffnen.
+2. Schul-Link von der IT/Schule eingeben.
+3. Login mit E-Mail und Passwort.
+4. Meist erscheint zuerst der Chat — das ist richtig.
+5. Oben die gelbe Leiste „Lehrer-Modus“ finden.
+6. PIN eingeben, „Freischalten“ klicken. (Pilot oft: 4545 — sonst IT fragen.)
+7. „Lehrer-Dashboard öffnen“ klicken.
+
+Fertig am PC? „Lehrer-Modus sperren“ — dann ist der Lehrer-Bereich auf diesem Rechner wieder zu.
+
+
+CHAT-SCHUTZ ÄNDERN (optional)
+Lehrerportal → Chat-Schutz → Schalter stellen → Speichern. Gilt für neue Tutor-Antworten.
+
+
+HEUTE UND JUNI
+• Heute: Nutzung über Internet (Adresse der Schule).
+• Juni (Plan): Schüler bringen eigene PCs, Nachweis offline oder im Schulnetz — Details von IT/Projektleitung.
+
+
+HILFE
+Login/Passwort → Schule oder IT.   PIN → IT.   Seite lädt nicht → IT.   Fach/Unterricht → Koordination.
