@@ -17,10 +17,7 @@ export default function ChatPage() {
 
   const t = React.useMemo(() => translations[language], [language])
 
-  const transport = React.useMemo(
-    () => new DefaultChatTransport({ credentials: 'include' }),
-    []
-  )
+  const transport = React.useMemo(() => new DefaultChatTransport({ credentials: 'include' }), [])
 
   useEffect(() => {
     queueMicrotask(() => {
@@ -46,26 +43,50 @@ export default function ChatPage() {
   useEffect(() => {
     if (!sessionId) return
 
-    fetch(`/api/messages?sessionId=${encodeURIComponent(sessionId)}`, {
-      credentials: 'include'
-    })
-      .then((res) => {
+    const ac = new AbortController()
+
+    ;(async () => {
+      try {
+        const res = await fetch(`/api/messages?sessionId=${encodeURIComponent(sessionId)}`, {
+          credentials: 'include',
+          signal: ac.signal
+        })
+
         if (res.status === 401) {
           router.push('/login?next=/chat')
-          return null
+          return
         }
-        // Wrong owner / policy — pick a fresh session id. Do not treat 404 here:
-        // new chats have no ChatSession row until the first message is sent.
+
         if (res.status === 403) {
+          let body: { code?: string } = {}
+          try {
+            body = await res.json()
+          } catch {
+            /* ignore non-JSON 403 bodies */
+          }
+          if (body?.code === 'TEACHER_PIN_REQUIRED') {
+            router.push('/chat?teacherPin=1')
+            return
+          }
           const nextId = crypto.randomUUID()
           localStorage.setItem('schoolai_current_session', nextId)
           setSessionId(nextId)
           setMessages([])
-          return null
+          return
         }
-        return res.json()
-      })
-      .then((data) => {
+
+        // Missing route / old deploy / HTML error page — never spin new session IDs.
+        if (res.status === 404 || !res.ok) {
+          console.warn('GET /api/messages returned', res.status, '(treating as empty history)')
+          return
+        }
+
+        let data: unknown
+        try {
+          data = await res.json()
+        } catch {
+          return
+        }
         if (!data || !Array.isArray(data)) return
         const formattedMessages = data.map((m) => ({
           id: m.id,
@@ -73,8 +94,13 @@ export default function ChatPage() {
           parts: [{ type: 'text' as const, text: m.content }]
         }))
         setMessages(formattedMessages)
-      })
-      .catch((err) => console.error('Error loading historical messages:', err))
+      } catch (err) {
+        if (err instanceof Error && err.name === 'AbortError') return
+        console.error('Error loading historical messages:', err)
+      }
+    })()
+
+    return () => ac.abort()
   }, [sessionId, setMessages, router])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -116,85 +142,85 @@ export default function ChatPage() {
     <div className="flex h-screen w-full flex-col bg-zinc-950 overflow-hidden">
       <PresentationTeacherBar />
       <div className="flex flex-1 min-h-0 w-full overflow-hidden">
-      <Sidebar
-        onNewChat={handleNewChat}
-        onSessionSelect={handleSessionSelect}
-        currentSessionId={sessionId}
-        language={language}
-        onLanguageChange={handleLanguageChange}
-      />
-
-      <main className="flex-1 flex flex-col relative">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-premium-violet/10 rounded-full blur-[100px] pointer-events-none"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-premium-blue/10 rounded-full blur-[100px] pointer-events-none"></div>
-
-        <div className="flex-1 overflow-y-auto px-6 py-10 lg:px-12 lg:py-16 z-10 scroll-smooth">
-          <div className="max-w-3xl mx-auto flex flex-col min-h-full">
-            {error && (
-              <div className="mb-8 p-5 rounded-3xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-center justify-between backdrop-blur-xl">
-                <span>
-                  {t.errorTitle}: {error.message}
-                </span>
-                <button
-                  onClick={() => clearError()}
-                  className="underline font-bold hover:text-red-300 transition-colors"
-                >
-                  {t.delete}
-                </button>
-              </div>
-            )}
-
-            {messages.length === 0 ? (
-              <div className="flex-1 flex flex-col items-center justify-center mb-12 text-center">
-                <div className="w-24 h-24 bg-gradient-to-br from-premium-violet to-premium-blue rounded-[2.5rem] mb-8 flex items-center justify-center shadow-[0_0_50px_rgba(139,92,246,0.4)] animate-pulse">
-                  <span className="text-5xl">🦉</span>
-                </div>
-                <h1 className="text-4xl font-bold text-white mb-4 font-display tracking-tight">
-                  {t.welcomeTitle}
-                </h1>
-                <p className="text-zinc-400 max-w-md mx-auto text-lg leading-relaxed">
-                  {t.welcomeSub}
-                </p>
-              </div>
-            ) : (
-              <div className="space-y-2">
-                {messages.map((m) => {
-                  const textContent =
-                    m.parts
-                      ?.filter((part) => part.type === 'text')
-                      .map((part) => ('text' in part ? part.text : ''))
-                      .join('') || ''
-
-                  return (
-                    <ChatBubble
-                      key={m.id}
-                      role={m.role as 'user' | 'assistant'}
-                      content={textContent}
-                    />
-                  )
-                })}
-              </div>
-            )}
-
-            {isLoading && (
-              <div className="flex items-center gap-2 mt-4 ml-2">
-                <div className="w-2 h-2 rounded-full bg-premium-violet animate-ping"></div>
-                <span className="text-xs text-premium-violet font-medium">{t.thinking}</span>
-              </div>
-            )}
-
-            <div ref={messagesEndRef} />
-          </div>
-        </div>
-
-        <ChatInput
-          input={input}
-          handleInputChange={handleInputChange}
-          handleSubmit={handleSubmit}
-          isLoading={isLoading}
-          placeholder={t.inputPlaceholder}
+        <Sidebar
+          onNewChat={handleNewChat}
+          onSessionSelect={handleSessionSelect}
+          currentSessionId={sessionId}
+          language={language}
+          onLanguageChange={handleLanguageChange}
         />
-      </main>
+
+        <main className="flex-1 flex flex-col relative">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-premium-violet/10 rounded-full blur-[100px] pointer-events-none"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-premium-blue/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+          <div className="flex-1 overflow-y-auto px-6 py-10 lg:px-12 lg:py-16 z-10 scroll-smooth">
+            <div className="max-w-3xl mx-auto flex flex-col min-h-full">
+              {error && (
+                <div className="mb-8 p-5 rounded-3xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-center justify-between backdrop-blur-xl">
+                  <span>
+                    {t.errorTitle}: {error.message}
+                  </span>
+                  <button
+                    onClick={() => clearError()}
+                    className="underline font-bold hover:text-red-300 transition-colors"
+                  >
+                    {t.delete}
+                  </button>
+                </div>
+              )}
+
+              {messages.length === 0 ? (
+                <div className="flex-1 flex flex-col items-center justify-center mb-12 text-center">
+                  <div className="w-24 h-24 bg-gradient-to-br from-premium-violet to-premium-blue rounded-[2.5rem] mb-8 flex items-center justify-center shadow-[0_0_50px_rgba(139,92,246,0.4)] animate-pulse">
+                    <span className="text-5xl">🦉</span>
+                  </div>
+                  <h1 className="text-4xl font-bold text-white mb-4 font-display tracking-tight">
+                    {t.welcomeTitle}
+                  </h1>
+                  <p className="text-zinc-400 max-w-md mx-auto text-lg leading-relaxed">
+                    {t.welcomeSub}
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  {messages.map((m) => {
+                    const textContent =
+                      m.parts
+                        ?.filter((part) => part.type === 'text')
+                        .map((part) => ('text' in part ? part.text : ''))
+                        .join('') || ''
+
+                    return (
+                      <ChatBubble
+                        key={m.id}
+                        role={m.role as 'user' | 'assistant'}
+                        content={textContent}
+                      />
+                    )
+                  })}
+                </div>
+              )}
+
+              {isLoading && (
+                <div className="flex items-center gap-2 mt-4 ml-2">
+                  <div className="w-2 h-2 rounded-full bg-premium-violet animate-ping"></div>
+                  <span className="text-xs text-premium-violet font-medium">{t.thinking}</span>
+                </div>
+              )}
+
+              <div ref={messagesEndRef} />
+            </div>
+          </div>
+
+          <ChatInput
+            input={input}
+            handleInputChange={handleInputChange}
+            handleSubmit={handleSubmit}
+            isLoading={isLoading}
+            placeholder={t.inputPlaceholder}
+          />
+        </main>
       </div>
     </div>
   )
