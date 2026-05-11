@@ -40,3 +40,14 @@ model Message {
   content       String      // The full text prompt or AI response
   createdAt     DateTime    @default(now())
 }
+
+// Singleton row id "global" — org-wide tutor guardrails controlled by teachers.
+model TeacherPolicy {
+  id                           String   @id @default("global")
+  blockFullEssays              Boolean  @default(true)
+  blockDirectHomeworkAnswers   Boolean  @default(true)
+  blockExamSolutions           Boolean  @default(true)
+  requireSocraticStyle         Boolean  @default(true)
+  updatedAt                    DateTime @updatedAt
+  updatedByUserId              String?
+}

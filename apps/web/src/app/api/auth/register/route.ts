@@ -1,7 +1,12 @@
 import { db } from 'database'
 import bcrypt from 'bcryptjs'
 import { cookies } from 'next/headers'
-import { SESSION_COOKIE_NAME, sessionCookieOptions } from '../../../../lib/auth-cookie'
+import {
+  ROLE_COOKIE_NAME,
+  SESSION_COOKIE_NAME,
+  roleCookieOptions,
+  sessionCookieOptions
+} from '../../../../lib/auth-cookie'
 
 export async function POST(req: Request) {
   try {
@@ -33,6 +38,7 @@ export async function POST(req: Request) {
     })
 
     ;(await cookies()).set(SESSION_COOKIE_NAME, user.id, sessionCookieOptions())
+    ;(await cookies()).set(ROLE_COOKIE_NAME, user.role, roleCookieOptions())
 
     return Response.json({
       message: 'User created successfully',

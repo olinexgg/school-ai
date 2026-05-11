@@ -1,14 +1,11 @@
 import { db } from 'database'
-import { getSessionUser } from '../../../../lib/server-auth'
+import { requireTeacherWithGate } from '../../../../lib/teacher-api-guard'
 
 export async function GET() {
   try {
-    const user = await getSessionUser()
-    if (!user) {
-      return Response.json({ error: 'Unauthorized' }, { status: 401 })
-    }
-    if (user.role !== 'TEACHER') {
-      return Response.json({ error: 'Forbidden' }, { status: 403 })
+    const gate = await requireTeacherWithGate()
+    if (!gate.ok) {
+      return Response.json({ error: gate.error, code: gate.code }, { status: gate.status })
     }
 
     const sessions = await db.chatSession.findMany({

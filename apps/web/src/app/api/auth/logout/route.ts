@@ -1,7 +1,14 @@
 import { cookies } from 'next/headers'
-import { SESSION_COOKIE_NAME } from '../../../../lib/auth-cookie'
+import {
+  ROLE_COOKIE_NAME,
+  SESSION_COOKIE_NAME,
+  TEACHER_GATE_COOKIE_NAME
+} from '../../../../lib/auth-cookie'
 
 export async function POST() {
-  ;(await cookies()).delete(SESSION_COOKIE_NAME)
+  const store = await cookies()
+  store.delete(SESSION_COOKIE_NAME)
+  store.delete(ROLE_COOKIE_NAME)
+  store.delete(TEACHER_GATE_COOKIE_NAME)
   return Response.json({ ok: true })
 }

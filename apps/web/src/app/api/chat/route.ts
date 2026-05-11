@@ -2,6 +2,11 @@ import { createOpenAI } from '@ai-sdk/openai'
 import { streamText, UIMessage } from 'ai'
 import { db } from 'database'
 import { getSessionUser } from '../../../lib/server-auth'
+import {
+  mergePolicyWithDefaults,
+  policyAppendixDe,
+  policyAppendixEn
+} from '../../../lib/teacher-policy-prompt'
 
 const ollama = createOpenAI({
   baseURL: 'http://127.0.0.1:11435/v1',
@@ -71,6 +76,11 @@ export async function POST(req: Request) {
       })
     }
 
+    const policyRow = await db.teacherPolicy.findUnique({ where: { id: 'global' } })
+    const policyFlags = mergePolicyWithDefaults(policyRow)
+    const policyExtra =
+      language === 'en' ? policyAppendixEn(policyFlags) : policyAppendixDe(policyFlags)
+
     const systemPrompt =
       language === 'en'
         ? `
@@ -80,7 +90,7 @@ export async function POST(req: Request) {
         Instead, ask targeted counter-questions that encourage the student to think.
         Be motivating, patient, and friendly.
         Always respond in English.
-      `
+      `.trim() + policyExtra
         : `
         Du bist Apertus, ein sokratischer Tutor. 
         Deine Aufgabe ist es, Schülern zu helfen, die Antwort selbst zu finden.
@@ -88,7 +98,7 @@ export async function POST(req: Request) {
         Stelle stattdessen gezielte Gegenfragen, die den Schüler zum Nachdenken anregen.
         Sei motivierend, geduldig und freundlich.
         Antworte immer auf Deutsch.
-      `
+      `.trim() + policyExtra
 
     const result = await streamText({
       model: ollama('apertus-tutor'),
