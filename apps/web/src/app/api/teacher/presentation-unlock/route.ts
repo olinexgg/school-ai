@@ -1,9 +1,7 @@
 import { cookies } from 'next/headers'
 import { getSessionUser } from '../../../../lib/server-auth'
-import {
-  TEACHER_DEMO_COOKIE_NAME,
-  teacherDemoCookieOptions
-} from '../../../../lib/auth-cookie'
+import { TEACHER_DEMO_COOKIE_NAME, teacherDemoCookieOptions } from '../../../../lib/auth-cookie'
+import { getEffectiveTeacherPresentationPin } from '../../../../lib/teacher-presentation'
 import { teacherPinMatches } from '../../../../lib/teacher-pin'
 import { teacherPinRateLimit, teacherPinReset } from '../../../../lib/teacher-pin-rate-limit'
 
@@ -14,10 +12,7 @@ export async function POST(req: Request) {
       return Response.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const envPin = process.env.TEACHER_PRESENTATION_PIN?.trim()
-    if (!envPin) {
-      return Response.json({ error: 'Presentation PIN is not configured on the server' }, { status: 400 })
-    }
+    const envPin = getEffectiveTeacherPresentationPin()
 
     const ip =
       req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||

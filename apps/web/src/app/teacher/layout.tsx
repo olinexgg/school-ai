@@ -3,10 +3,7 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { PresentationTeacherBar } from '../../components/teacher/PresentationTeacherBar'
 import { getSessionUser } from '../../lib/server-auth'
-import {
-  hasTeacherPresentationAccess,
-  isPresentationPinConfigured
-} from '../../lib/teacher-presentation'
+import { hasTeacherPresentationAccess } from '../../lib/teacher-presentation'
 import { lockTeacherPortal } from './actions'
 
 export default async function TeacherLayout({ children }: { children: React.ReactNode }) {
@@ -18,7 +15,7 @@ export default async function TeacherLayout({ children }: { children: React.Reac
     redirect(`/login?next=${encodeURIComponent(pathname)}`)
   }
 
-  if (!(await hasTeacherPresentationAccess()) && isPresentationPinConfigured()) {
+  if (!(await hasTeacherPresentationAccess())) {
     redirect('/chat?teacherPin=1')
   }
 

@@ -21,12 +21,11 @@ function BarInner() {
         if (d && typeof d.unlocked === 'boolean') {
           setStatus({ unlocked: d.unlocked, pinConfigured: Boolean(d.pinConfigured) })
         } else {
-          // Assume open mode so the bar stays usable if the endpoint errors mid-demo.
-          setStatus({ unlocked: true, pinConfigured: false })
+          setStatus({ unlocked: false, pinConfigured: true })
         }
       })
       .catch(() => {
-        setStatus({ unlocked: true, pinConfigured: false })
+        setStatus({ unlocked: false, pinConfigured: true })
       })
   }, [])
 
@@ -97,11 +96,6 @@ function BarInner() {
           <span className="text-amber-300 font-black text-xs uppercase tracking-[0.2em] shrink-0">
             Teacher mode
           </span>
-          {!status.pinConfigured && (
-            <span className="text-zinc-500 text-xs truncate">
-              (No PIN on server — dashboard open to any logged-in user)
-            </span>
-          )}
           {status.pinConfigured && status.unlocked && (
             <span className="text-emerald-400 text-xs font-bold">Unlocked</span>
           )}
