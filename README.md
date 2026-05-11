@@ -1,32 +1,70 @@
-# SchoolAI Server
+# 🏫 SchoolAI - The Socratic AI Tutor
 
-Offline AI Chatbot & Tutor Platform running on dedicated hardware.
+SchoolAI is a premium educational platform designed to help students learn more effectively through AI-guided tutoring. Unlike traditional AI chatbots that simply provide answers, SchoolAI features **Apertus**, an AI persona calibrated to follow the Socratic method.
 
-> [!TIP]
-> **Assistant Note**: For current project status and technical designs, see [AGENTS.md](./AGENTS.md).
+## 🚀 Key Features
 
-## Hardware Specifications
+- **Socratic Tutoring:** Apertus never gives direct answers, only hints and counter-questions.
+- **Teacher Dashboard:** Real-time monitoring of student sessions for pedagogical quality control.
+- **Multilingual Support:** Fully bilingual interface and AI response system (German/English).
+- **Secure Authentication:** Email/Password login with encrypted credentials.
+- **Premium UI:** Modern, high-fidelity design with glassmorphism and smooth animations.
 
-- **CPU**: Intel Core i7-14700KF
-- **GPU**: NVIDIA GeForce RTX 5070 Ti
-- **RAM**: [To Be Verified]
-- **Storage**:
-  - Drive A: 1TB NVMe (Windows)
-  - Drive B: 2TB NVMe (Ubuntu Server - This OS)
+## 🛠 Tech Stack
 
-## Architecture
+- **Frontend:** [Next.js 16](https://nextjs.org/) (App Router), Tailwind CSS.
+- **Backend:** Node.js API Routes.
+- **Database:** [PostgreSQL](https://www.postgresql.org/) with [Prisma ORM](https://www.prisma.io/).
+- **AI Engine:** [Ollama](https://ollama.com/) running a custom-calibrated Llama3 model.
+- **Infrastructure:** Docker-based deployment managed via [Coolify](https://coolify.io/).
 
-The system is designed as a Monorepo containing:
+## 📂 Project Structure (Monorepo)
 
-- **scripts/**: Maintenance and setup scripts.
-- **models/**: Configuration files (Modelfiles) for Ollama.
-- **docs/**: Project documentation.
+```text
+/
+├── apps/
+│   └── web/            # Next.js Frontend & API Routes
+├── packages/
+│   └── database/       # Prisma Schema & Database Client
+├── docs/               # Technical manuals and progress reports
+├── Modelfile.apertus   # AI persona calibration file
+└── Projekt Plan.md     # Master project roadmap
+```
 
-## services
+## ⚙️ Setup & Installation
 
-- **Ollama**: Local LLM inference server (GPU-accelerated).
-- **Open WebUI**: Chat interface interacting with Ollama.
+### Prerequisites
 
-## Quick Start
+- Node.js 20+
+- Docker & Docker Compose
+- Ollama (installed locally or via Docker)
 
-_(Coming Soon)_
+### 1. Database Setup
+
+```bash
+cd packages/database
+npx prisma db push
+```
+
+### 2. AI Model Calibration
+
+```bash
+# Create the specialized Apertus tutor model
+ollama create apertus-tutor -f Modelfile.apertus
+```
+
+### 3. Start the Web Portal
+
+```bash
+cd apps/web
+npm install
+npm run dev
+```
+
+## 🛡 Security & Privacy
+
+SchoolAI is designed with student privacy in mind. All chat sessions are logged securely and can only be accessed by authorized teachers via the Teacher Portal. Passwords are encrypted using bcrypt.
+
+---
+
+**Developed by olinexgg | 2026**
