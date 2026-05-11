@@ -1,97 +1,146 @@
-# SchoolAI — Teacher portal guide
+# SchoolAI — Lehrerportal (einfach erklärt)
 
-This document is for **teachers and school staff** who supervise the AI tutor, review student activity, and adjust **chat protection** rules for your class or school.
+Diese Anleitung richtet sich an **Lehrkräfte und Schulpersonal** ohne IT-Vorkenntnisse. Sie erklärt, **wo Sie klicken**, was die **gelbe Leiste** bedeutet und wofür das **Lehrerportal** da ist.
 
----
-
-## What the teacher portal is for
-
-SchoolAI gives students a **tutor chat** that is meant to help them learn (hints, explanations, practice) rather than replace their own work. The teacher portal helps you:
-
-1. **See an overview** of recent chat sessions (who was active and when).
-2. **Open a session** to read the conversation when you need to support a student or follow up after class.
-3. **Set school-wide chat protection** (for example: no full essays, no finished homework answers, Socratic style). These rules apply to **new** tutor replies once saved.
-
-The student app and the teacher portal are part of the **same school project**; use them together with your normal classroom and safeguarding practices.
+**Hinweis zu den Zeichnungen:** Die **farbig markierten Ablaufpläne** (Diagramme) werden auf GitHub und in vielen Programmen automatisch als Bild angezeigt. Öffnen Sie diese Datei dort, falls Sie nur Text sehen.
 
 ---
 
-## How to access the teacher portal
+## 1. Was Sie auf dem Bildschirm sehen (Skizze)
 
-### 1. Sign in
+Stellen Sie sich den Chat wie ein **Fenster mit drei Ebenen** vor — von oben nach unten:
 
-Use the **school account** (email and password) your administrator created for you. Open your SchoolAI address in the browser (the URL your school shared — it may look like `https://…your-school…`).
+```text
+    ┌─────────────────────────────────────────────────────────┐
+    │  GELBE LEISTE: „Lehrer-Modus“ + PIN + Freischalten      │  ← nur für Lehrkräfte
+    ├─────────────────────────────────────────────────────────┤
+    │                                                         │
+    │              CHAT (Schüler-Ansicht)                    │  ← hier schreiben Schüler
+    │                                                         │
+    ├─────────────────────────────────────────────────────────┤
+    │              Eingabefeld + Senden                       │
+    └─────────────────────────────────────────────────────────┘
+```
 
-- Go to **Login**.
-- After login, you will normally land on the **student chat** view first. That is expected.
-
-### 2. Unlock **Teacher mode** with the presentation PIN
-
-For safety in shared rooms and demos, **teacher tools are locked** until someone enters a short **presentation PIN** on that browser.
-
-1. On the **Chat** page, look at the **amber “Teacher mode” bar** at the top.
-2. Enter the **presentation PIN** your school gave you and click **Unlock**.
-
-**Default for pilots:** if your school has not set a custom PIN on the server, the shared demo PIN is **`4545`**. Your IT lead can change this later via server configuration; if they do, they must tell staff the new PIN.
-
-3. When unlocked, the bar shows **Unlocked** and a button **Open dashboard** — that opens the **Teacher portal** (`/teacher`).
-
-**Tip:** If you opened a link that ends with `?teacherPin=1`, the page will focus the PIN field so you can unlock quickly.
-
-### 3. Lock again when you are done
-
-On the teacher portal, use **Lock teacher mode** (or **Lock** on the bar) when you leave a shared computer or finish a demo. That clears the unlock for that browser until the PIN is entered again.
-
-Students stay signed in with their **own** accounts; the PIN only controls **teacher-level** access on **your** session.
+Die **gelbe Leiste** ist wie ein **Schloss vor dem Lehrerzimmer**: Solange es zu ist, können Sie das **Lehrer-Dashboard** nicht sinnvoll nutzen. Nach der PIN sind **Zusatzfunktionen** frei (Übersicht, Gespräche ansehen, Regeln).
 
 ---
 
-## Using the teacher dashboard
+## 2. Wofür das Lehrerportal gut ist
 
-### Overview (`/teacher`)
+SchoolAI ist ein **KI-Tutor im Chat**. Er soll **Lernen unterstützen** (Fragen, Erklärungen, Üben) — nicht die Arbeit der Schülerinnen und Schüler ersetzen.
 
-- **Active sessions** — snapshot of sessions the system can list for audit.
-- **Unique students** — rough count of different student accounts in that snapshot.
-- From here you can open a **session** to read messages, or go to **Chat protection** for settings.
+Mit dem **Lehrerportal** können Sie:
 
-### Chat protection (`/teacher/settings` — “Chat protection”)
+1. **Überblick** — Wer war zuletzt im Chat? Wann ungefähr?
+2. **Einzelgespräch ansehen** — Wenn Sie nachfassen oder jemanden unterstützen möchten.
+3. **Chat-Schutz** — Regeln für alle (z. B. keine fertigen Hausaufgaben, eher Rückfragen). Gilt für **neue** Antworten des Tutors, nachdem Sie gespeichert haben.
 
-Here you turn rules on or off for how the tutor should behave. Plain-language meaning:
-
-| Setting                          | What it does                                                                                                  |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| **No full essays**               | Reduces the chance the tutor writes a complete, submission-ready long essay for the student.                  |
-| **No finished homework answers** | Encourages hints and guiding questions instead of a full worked solution the student could paste as homework. |
-| **No model exam solutions**      | Avoids fully worked exam papers; still allows strategies and self-check ideas.                                |
-| **Strict Socratic tone**         | Pushes the tutor toward questions and guidance rather than dumping direct answers when that fits the topic.   |
-
-Click **Save** when you change toggles. New replies in chat should follow the updated rules.
-
-### Student view
-
-Use **Student view** (or go to `/chat`) to see the app **as a student** would — useful when explaining the tool in class.
+Das gehört zum **Schulprojekt** — bitte weiterhin mit Ihren üblichen Regeln zu Unterricht und Prävention kombinieren.
 
 ---
 
-## Internet today — offline demonstration in June
+## 3. So kommen Sie ins Lehrerportal (Ablauf als „Wegkarte“)
 
-**Today:** SchoolAI is reachable **over the internet** on the address your school provides. Teachers and students can try it from home or school as long as the network allows that site.
+```mermaid
+flowchart TD
+    A[🌐 Schul-Link im Browser öffnen] --> B[Anmelden / Login]
+    B --> C[Sie landen oft im Chat — das ist richtig]
+    C --> D[Gelbe Leiste: PIN eingeben]
+    D --> E[Freischalten klicken]
+    E --> F[Lehrer-Dashboard öffnen]
+    F --> G[Übersicht oder Chat-Schutz]
+```
 
-**June (planned milestone):** Students are expected to **bring their own PCs to school** and **show that the solution works offline** (or in a school-local setup your project defines). Until that milestone is fully delivered, assume that **some features may still depend on network or school servers**; your project lead will confirm exactly what is guaranteed offline for the demo.
+**Schritt für Schritt:**
 
-If you are preparing materials for June, coordinate with **IT / project lead** on the checklist (build version, local server or packaged app, and which URLs must work without the public internet).
+1. **Link** von der Schule oder der IT verwenden (beginnt meist mit `https://`).
+2. **Login** mit dem Konto, das Ihnen **Schule oder IT** gegeben hat (E-Mail und Passwort).
+3. Sie sehen oft zuerst den **Chat** — das ist beabsichtigt.
+4. Oben die **gelbe Leiste** „Lehrer-Modus“: **PIN** eintragen und **Freischalten**.
+5. Danach erscheint u. a. **Lehrer-Dashboard öffnen** — dort ist das Portal.
+
+### PIN in einfachen Worten
+
+```mermaid
+flowchart LR
+    subgraph Vorher["Ohne PIN"]
+        A1[Gelbe Leiste] --> A2[Dashboard gesperrt]
+    end
+    subgraph Nachher["Mit richtiger PIN"]
+        B1[Gelbe Leiste] --> B2[Freigeschaltet]
+        B2 --> B3[Dashboard nutzbar]
+    end
+```
+
+**Pilot-Stand:** Wenn die Schule **keine eigene PIN** auf dem Server eingestellt hat, ist die **Demo-PIN** oft **`4545`**. Wenn die IT eine **eigene PIN** setzt, teilt sie Ihnen die neue mit.
+
+**Tipp:** Wenn ein Link mit `?teacherPin=1` endet, springt die Seite direkt zur PIN — praktisch nach einer Weiterleitung.
+
+### Wieder abschließen
+
+Wenn Sie einen **gemeinsamen Rechner** verlassen oder eine **Präsentation** beenden: **Lehrer-Modus sperren** (im Portal oder an der Leiste). Dann ist der Lehrer-Zugang auf **diesem Browser** wieder weg, bis jemand die PIN erneut eingibt.
+
+Die **Schülerkonten** bleiben davon getrennt — die PIN schützt nur den **Lehrer-Bereich** auf **Ihrer** Sitzung.
 
 ---
 
-## Who to ask when something fails
+## 4. Im Dashboard: Was bedeuten die Bereiche?
 
-| Problem                                    | Who to ask                                   |
-| ------------------------------------------ | -------------------------------------------- |
-| Forgot login / password                    | School admin or IT                           |
-| PIN not accepted / “teacher mode” blocked  | IT (PIN may have been changed on the server) |
-| Page not loading, 404, or “offline” errors | IT / hosting (deployment, DNS, firewall)     |
-| Pedagogy / classroom rules                 | Your lead teacher or coordinator             |
+### Übersicht
+
+- **Aktive Sitzungen** — Momentaufnahme, wer im System sichtbar ist.
+- **Verschiedene Schülerkonten** — grobe Zahl unterschiedlicher Nutzer in dieser Ansicht.
+- Von hier aus können Sie eine **Sitzung öffnen** (Verlauf lesen) oder zu **Chat-Schutz** wechseln.
+
+### Chat-Schutz (Einstellungen)
+
+Hier schalten Sie Regeln **ein oder aus**. Kurz erklärt:
+
+| Einstellung (im Programm)        | Was es für den Unterricht bedeutet                                                     |
+| -------------------------------- | -------------------------------------------------------------------------------------- |
+| **Keine vollen Aufsätze**        | Der Tutor soll keine fertige, lange Abgabe „in einem Stück“ schreiben.                 |
+| **Keine fertigen Hausaufgaben**  | Statt kompletter Lösung: eher Tipps und Leitfragen.                                    |
+| **Keine Musterklausur-Lösungen** | Keine durchgerechneten Prüfungen als Vorlage; Strategien und Selbstcheck sind möglich. |
+| **Streng sokratischer Ton**      | Mehr Rückfragen und Führen, weniger „reine Endantwort“.                                |
+
+Nach Änderungen **Speichern** klicken. **Neue** Chat-Antworten richten sich danach.
+
+### Schüler-Ansicht
+
+**Schüler-Ansicht** (oder Seite „Chat“) zeigt die App **wie für Schülerinnen und Schüler** — gut, um im Unterricht zu erklären.
 
 ---
 
-_Document version: aligned with SchoolAI teacher portal (presentation PIN, overview, audit, chat protection). Update the June paragraph when the offline scope is finalized._
+## 5. Heute: Internet — Juni: Computer mit in die Schule
+
+```mermaid
+flowchart LR
+    subgraph Heute["Stand heute"]
+        A[Internet-Adresse der Schule] --> B[Zugriff von Schule und Zuhause]
+    end
+    subgraph Juni["Geplant Juni"]
+        C[Eigene PCs in die Schule] --> D[Nachweis: funktioniert offline oder im Schulnetz]
+    end
+```
+
+**Stand heute:** SchoolAI ist über das **Internet** erreichbar — mit der Adresse, die Ihre Schule oder IT mitteilt. Zuhause oder in der Schule nutzbar, sofern das Netzwerk die Seite erlaubt.
+
+**Geplant für Juni:** Schülerinnen und Schüler bringen **eigene PCs in die Schule** und **zeigen**, dass die Lösung **ohne öffentliches Internet** (oder in einem **schulinternen** Aufbau) funktioniert — je nachdem, was das Projekt genau vorgibt.
+
+Bis dieser Meilenstein **vollständig** umgesetzt ist, können **einzelne Funktionen** noch vom Netz oder vom Schulserver abhängen. **IT oder Projektleitung** sagt Ihnen rechtzeitig, was im Juni **garantiert offline** demonstriert werden soll.
+
+---
+
+## 6. Wenn etwas nicht klappt — wen fragen?
+
+| Problem                         | Wen fragen                                        |
+| ------------------------------- | ------------------------------------------------- |
+| Passwort vergessen / Login      | Schulsekretariat oder IT                          |
+| PIN wird nicht angenommen       | IT (PIN kann auf dem Server geändert worden sein) |
+| Seite lädt nicht, Fehlermeldung | IT / Hosting                                      |
+| Fachlich / Regeln im Unterricht | Fachschaftsleitung oder Koordination              |
+
+---
+
+_Dokument-Version: Lehrerportal mit Präsentations-PIN, Übersicht, Sitzungs-Audit und Chat-Schutz. Abschnitt „Juni“ anpassen, sobald der Offline-Umfang feststeht._
