@@ -1,11 +1,32 @@
 # Node
 node_modules/
 .next/
-.env
-.env.local
+out/
+build/
+dist/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
+
+# Environment & secrets (never commit real values)
+.env
+.env.*
+!.env.example
+!**/.env.example
+!.env.sample
+!**/.env.sample
+
+# Keys & certificates (private material)
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+*.keystore
 
 # Python/AI
 __pycache__/
@@ -22,7 +43,31 @@ env/
 # OS
 .DS_Store
 Thumbs.db
+*.swp
+*~
 
-# IDE
+# IDE (local-only; do not commit personal tool paths)
 .vscode/
 .idea/
+
+# Local / generated tooling
+.vercel
+*.tsbuildinfo
+.turbo/
+
+# Database dumps & backups (often contain PII)
+*.dump
+*.sql.gz
+/backups/
+
+# Cloudflare Tunnel — repo must only ship templates.
+# Real /etc-style config and JSON credentials belong on the server only.
+deploy/cloudflared/config.etc.yml
+deploy/cloudflared/*.json
+.cloudflared/
+**/cloudflared-credentials.json
+
+# Deploy overrides (machine-specific)
+deploy/**/*.local.*
+deploy/**/.env
+deploy/**/.env.*

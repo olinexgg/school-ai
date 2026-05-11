@@ -1,0 +1,8 @@
+{
+  "name": "SchoolAI",
+  "short_name": "SchoolAI",
+  "display": "standalone",
+  "start_url": "/",
+  "background_color": "#09090b",
+  "theme_color": "#09090b"
+}

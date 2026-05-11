@@ -1,0 +1,17 @@
+[Unit]
+Description=SchoolAI Next.js (origin for schoolai.olinex.me)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=olinexgg
+Group=olinexgg
+WorkingDirectory=/data/apps/school-ai/dev/apps/web
+Environment=NEXT_TELEMETRY_DISABLED=1
+ExecStart=/usr/local/bin/schoolai-next-exec.sh
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

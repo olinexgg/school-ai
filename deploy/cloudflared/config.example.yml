@@ -1,0 +1,33 @@
+# Cloudflare Tunnel → Open WebUI on this host (see docker-compose: 8080).
+# Copy to /etc/cloudflared/config.yml and fill tunnel UUID + credentials path.
+#
+#   sudo cp deploy/cloudflared/config.example.yml /etc/cloudflared/config.yml
+#   sudo nano /etc/cloudflared/config.yml
+#
+# Create tunnel + credentials (once):
+#   cloudflared tunnel login
+#   cloudflared tunnel create school-ai-webui
+#   sudo cp ~/.cloudflared/<UUID>.json /etc/cloudflared/school-ai-webui.json
+#   sudo chmod 600 /etc/cloudflared/school-ai-webui.json
+#
+# DNS (pick one):
+#   cloudflared tunnel route dns school-ai-webui schoolai.olinex.me
+#   …or CNAME in Cloudflare dashboard to <tunnel-id>.cfargotunnel.com
+
+tunnel: REPLACE_WITH_TUNNEL_UUID_OR_NAME
+credentials-file: /etc/cloudflared/school-ai-webui.json
+
+ingress:
+  # Canonical + short name (both must be listed or one returns Cloudflare 404).
+  - hostname: school-ai.olinex.me
+    service: http://127.0.0.1:3001
+  - hostname: schoolai.olinex.me
+    service: http://127.0.0.1:3001
+
+  # If this app is only reachable via Coolify’s proxy on port 80, use instead:
+  # - hostname: webui.example.com
+  #   service: http://127.0.0.1:80
+  #   originRequest:
+  #     httpHostHeader: internal-hostname.coolify-uses-for-the-app
+
+  - service: http_status:404

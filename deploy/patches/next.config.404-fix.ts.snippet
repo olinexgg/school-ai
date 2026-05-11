@@ -1,0 +1,22 @@
+// Merge into apps/web/next.config.ts — fixes DevTools 404s + cross-origin dev for schoolai.olinex.me
+// allowedDevOrigins: add 'schoolai.olinex.me', 'https://schoolai.olinex.me'
+// rewrites: apple-touch-icon -> favicon, manifest.json -> site.webmanifest
+
+import type { NextConfig } from 'next'
+
+const nextConfig: NextConfig = {
+  // @ts-ignore
+  allowedDevOrigins: [
+    '192.168.0.119',
+    '192.168.0.119:3001',
+    'schoolai.olinex.me'
+  ],
+  async rewrites() {
+    return [
+      { source: '/apple-touch-icon.png', destination: '/favicon.ico' },
+      { source: '/manifest.json', destination: '/site.webmanifest' }
+    ]
+  }
+}
+
+export default nextConfig
