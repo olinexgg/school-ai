@@ -4,6 +4,7 @@
 * **Name:** Olivier Nerko
 * **Projekt:** SchoolAI (Ein Chatbot, der beim Lernen hilft)
 * **Klasse / Schule:** Sekundarstufe (15 Jahre alt)
+* **GitHub-Link:** [https://github.com/olinexgg/school-ai](https://github.com/olinexgg/school-ai) (Branch: `dev`)
 
 ---
 
