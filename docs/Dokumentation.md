@@ -28,24 +28,16 @@ Normale Chatbots wie ChatGPT sind in der Schule oft ein Problem, weil Schüler s
 - **Gegenfragen stellen:** Er verhält sich wie ein Nachhilfelehrer und stellt Fragen, die dem Schüler helfen, den Weg zur Lösung selbst zu finden.
 - **Keine fertigen Aufsätze:** Wenn man ihn bittet, einen Aufsatz zu schreiben, gibt er nur eine Gliederung oder Ideen vor. Den Text muss der Schüler selbst schreiben.
 
-### Der Ablauf im Chatbot sieht so aus:
+### Der Ablauf im Chatbot (Schritt für Schritt):
 
-```mermaid
-flowchart TD
-    Start([Schüler schreibt Nachricht]) --> Frage{Ist es eine direkte\nHausaufgabenfrage?}
-
-    Frage -- Ja --> Verweigern[Antwort verweigern]
-    Frage -- Nein --> Aufsatz{Soll ein ganzer Aufsatz\ngeschrieben werden?}
-
-    Verweigern --> Tipp[Tipp oder Gegenfrage geben]
-    Tipp --> Ende([Auf Antwort des Schülers warten])
-
-    Aufsatz -- Ja --> Struktur[Nur Struktur/Ideen zeigen]
-    Struktur --> Ende
-
-    Aufsatz -- Nein --> Erklaeren[Konzept erklären und Fragen stellen]
-    Erklaeren --> Ende
-```
+1. **Nachricht senden**: Der Schüler schreibt eine Frage oder Aufgabe in den Chat.
+2. **Prüfung auf Hausaufgaben**: Der Chatbot prüft: Ist das eine Frage nach einer fertigen Hausaufgaben-Lösung?
+   - **Ja**: Der Bot verweigert die direkte Lösung und gibt stattdessen einen kleinen Tipp oder stellt eine Gegenfrage.
+   - **Nein**: Der Bot geht zum nächsten Schritt.
+3. **Prüfung auf Aufsätze**: Soll ein ganzer Aufsatz oder ein fertiger Aufsatztext geschrieben werden?
+   - **Ja**: Der Bot verweigert das Schreiben des Textes und zeigt stattdessen nur eine Gliederung oder Ideen zum Selberschreiben.
+   - **Nein**: Der Bot erklärt das Thema mit Beispielen und stellt Gegenfragen zum Nachdenken.
+4. **Warten**: Der Bot wartet auf die Antwort des Schülers, um den nächsten Schritt zu besprechen.
 
 ---
 
