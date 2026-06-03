@@ -129,3 +129,45 @@ Die App läuft stabil und ist komplett fertig. Im Juni wollen wir:
 2. **Feedback sammeln:** Ein paar Mitschüler werden die App testen und mir sagen, ob der Tutor schlau antwortet und schnell genug ist.
 
 SchoolAI zeigt, dass man KIs in der Schule sicher und ohne Angst vor Datenschutzproblemen einsetzen kann, um wirklich etwas zu lernen!
+
+---
+
+## 8. Code-Struktur und technische Übersicht (für die Bewertung)
+
+Damit Frau Schwab und Herr Kamm meinen Code einfach bewerten können, habe ich hier aufgeschrieben, wo die wichtigsten Programmierarbeiten liegen. Das Projekt ist als sogenanntes **Monorepo** aufgebaut. Das bedeutet, dass der gesamte Code für die Webseite, die Datenbank und die KI-Einstellungen in einem einzigen Projektordner organisiert ist.
+
+### 8.1 Wo liegt was? (Ordnerstruktur)
+
+* **`apps/web/`**: Hier liegt der gesamte Code für die Next.js-Webseite (das Frontend, das die Schüler und Lehrer sehen, und das Backend, das die Klick-Befehle verarbeitet).
+* **`packages/database/`**: Hier sind die Einstellungen für unsere PostgreSQL-Datenbank und die Prisma-Verbindung.
+* **`models/`** und **`Modelfile.apertus`**: Hier liegen die Konfigurationsdateien für das KI-Modell (die Prompt-Regeln für Ollama).
+* **`docs/`**: Hier sind alle Konzepte, Anleitungen und diese Projektdokumentation gespeichert.
+
+### 8.2 Die wichtigsten Codedateien zum Anschauen
+
+1. **Die KI-Logik & API-Route** ([apps/web/src/app/api/chat/route.ts](file:///data/apps/school-ai/dev/apps/web/src/app/api/chat/route.ts)):
+   Diese Datei verarbeitet die Chat-Nachrichten der Schüler. Sie steuert, dass der Bot je nach Sprache (Deutsch oder Englisch) die sokratischen Regeln anwendet. Außerdem liest sie die vom Lehrer eingestellten Regeln aus der Datenbank aus und fügt sie dem System-Prompt hinzu.
+2. **Das Datenbank-Modell** ([packages/database/prisma/schema.prisma](file:///data/apps/school-ai/dev/packages/database/prisma/schema.prisma)):
+   Hier habe ich die Tabellen definiert (User, ChatSession, Message, TeacherPolicy). Man sieht genau, wie die Nachrichten mit den Benutzern verknüpft sind und wie die Lehrer-Einstellungen gespeichert werden.
+3. **Das Lehrer-Dashboard** ([apps/web/src/app/teacher/page.tsx](file:///data/apps/school-ai/dev/apps/web/src/app/teacher/page.tsx)):
+   Der Code für die Lehrer-Oberfläche. Hier wird geprüft, ob die PIN (`4545`) korrekt eingegeben wurde, um das Dashboard freizuschalten. Es lädt auch die Chat-Verläufe der Schüler, damit der Lehrer sie kontrollieren kann.
+4. **Die KI-Konfiguration** ([Modelfile.apertus](file:///data/apps/school-ai/dev/Modelfile.apertus)):
+   In dieser Datei habe ich direkt im KI-Modell (Apertus) festgelegt, dass es sich wie ein sokratischer Tutor verhalten muss und niemals Lösungen vorsagen darf.
+
+### 8.3 Wie man das Programm startet (für die Bewertung)
+
+Falls Herr Kamm das Programm auf einem PC/Server testen möchte, geht das mit folgenden Befehlen im Hauptverzeichnis:
+1. Docker-Container im Hintergrund starten:
+   ```bash
+   docker compose up -d
+   ```
+2. Datenbank-Tabellen erstellen/synchronisieren:
+   ```bash
+   npx prisma db push
+   ```
+3. Den Webserver für die Webseite im Entwicklungsmodus starten:
+   ```bash
+   npm run dev
+   ```
+Danach ist die Webseite lokal unter `http://localhost:3000` erreichbar.
+
